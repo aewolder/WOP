@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>I-O Psychology Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .answers button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .answers button:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+
+        .correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .incorrect {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #nextBtn {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+
+        #result {
+            font-size: 1.3em;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #restartBtn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+    
+/* Mobile enhancements */
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: system-ui, Arial, sans-serif;
+}
+
+.container, .quiz-container {
+    max-width: 480px;
+    width: 100%;
+    margin: auto;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1em;
+    margin-top: 12px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+}
+
+.question {
+    font-size: 1.1em;
+    line-height: 1.4;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>I-O Psychology Quiz</h1>
+<div id="progress" style="text-align:center; font-weight:bold; margin-bottom:15px;"></div>
+
+<div id="quiz">
+    <div id="question" class="question"></div>
+    <div id="answers" class="answers"></div>
+    <button id="nextBtn">Next Question</button>
+</div>
+
+<div id="result" style="display:none;"></div>
+<button id="restartBtn" style="display:none;">Restart Quiz</button>
+
+<script>
+alert("JS is running");
+
+/* ---------------- QUESTIONS ---------------- */
+
+const questions = [
+    {
+        question: "“(C2.1) Disinterestedness” refers to the notion that",
+        answers: {
+            a: "lay persons find scientific research hard to understand, and therefore are not interested in it.",
+            b: "people who belong to an organized religion find that science often contradicts many of the religion’s core beliefs.",
+            c: "scientists should be objective and not influenced by biases or prejudices.",
+            d: "employee motivation tends to decrease the longer people work for a particular company."
+        },
+        correct: "c"
+    },
+    
+ {
+        question: "(C2.2) According to the text, research designs in I-O psychology can be broken down into three basic types:",
+        answers: {
+            a: "block design, clinical interviews, archival research.",
+            b: "post hoc, a priori, experimental.",
+            c: "t-tests, f-tests, chi square.",
+            d: "experimental, quasi-experimental, non experimental."
+        },
+        correct: "d"
+      },
+      
+ {
+        question: "(C2.3)  As a convention, when visually describing a distribution of scores or numbers, researchers will set the frequency of the scores on the ______axis and the score or numbers associated with a particular criterion on the ____ axis.",
+        answers: {
+            a: "X(horizontal), Y(vertical)",
+            b: "Y(vertical), X(horizontal)",
+            c: "Y(horizontal), X(vertical)",
+            d: "X(vertical), Y(horizontal)"
+        },
+        correct: "b"
+      },
+    
+ {
+        question: "(C2.4) If a researcher wants to examine whether a test is reliable over a reasonable time period, he or she might",
+        answers: {
+            a: "administer the test to the same people at two different points in time and calculate a correlation coefficient between the scores taken at time one and the scores taken at time two.",
+            b: "devise different forms of the test that measure the same general content and correlate the scores of each test with each other.",
+            c: "allow the test to be judged by several different individuals who all agree on what the test is designed to measure.",
+            d: "break the test into two sections and correlate the two sections with each other."
+        },
+        correct: "a"
+      },
+       
+{
+        question: "(C3.1) 1. Early individual differences tests focused on measuring",
+        answers: {
+            a: "interests",
+            b: "opinions.",
+            c: "beliefs.",
+            d: "intelligence."
+        },
+        correct: "d"
+      },
+{
+        question: "(C3.2) 9. Perceptual-motor abilities are ",
+        answers: {
+            a: "mental abilities that combine memory and recall.",
+            b: "physical abilities that combine strength and stamina.",
+            c: "physical attributes that combine the senses and motion.",
+            d: "mental abilities that combine a persons IQ and “g.”"
+        },
+        correct: "c"
+      },
+       {
+        question: "(C3.2) 10. _______________ often refers to specific abilities such as memory and reasoning, whereas _______________refers to a more general ability to adapt to an environment.",
+        answers: {
+            a: "Cognitive ability; intelligence",
+            b: "Intelligence; cognitive ability",
+            c: "Cognitive ability; determination",
+            d: "Intelligence; personality"
+        },
+        correct: "a"
+      },
+ 
+{
+        question: "(C3.3) 40. The term ___________ was given to psychological tests by Cattell in 1890. ",
+        answers: {
+            a: "general test",
+            b: "mental test",
+            c: "quotient test",
+            d: "intelligence test"
+        },
+        correct: "b"
+      },
+      
+ {
+        question: "(C3.4)  59. A cognitive ability test that uses 50 items to assess verbal, numerical, and spatial abilities is known as the",
+        answers: {
+            a: "Wonderlic Personnel Test.",
+            b: "Bennett Test of Mechanical Comprehension.",
+            c: "Primary Mental Abilities Test.",
+            d: "Differential Aptitude Test."
+        },
+        correct: "a"
+      },
+        
+{
+        question: "(C4.1) 1. An employee’s behavior in a work setting, which can be measured in terms of individual proficiency, is best characterized as",
+        answers: {
+            a: "productivity",
+            b: "effectiveness",
+            c: "knowledge",
+            d: "performance"
+        },
+        correct: "d"
+      },
+      
+{
+        question: "(C4.2) 16. Questionnaires that assess an individual’s Organizational Citizenship Behavior (OCB) assess",
+        answers: {
+            a: "altruism and generalized compliance",
+            b: "productivity and effectiveness",
+            c: "performance and effectiveness",
+            d: "commitment and motivation"
+        },
+        correct: "a"
+      },
+     
+{
+        question: "(C4.3) 41. “Job ladder” and “job families” are concepts most helpful for developing _________ systems.",
+        answers: {
+            a: "recruiting",
+            b: "training",
+            c: "compensation",
+            d: "promotion"
+        },
+        correct: "d"
+      },
+      
+{
+        question: "(C4.4) 48. All of the following are negative aspects of electronic performance monitoring except",
+        answers: {
+            a: "it provides raw material for job analysis.",
+            b: "it may violate privacy rights.",
+            c: "employers may use punitive actions based on this approach.",
+            d: "it may foster negative perceptions of fairness."
+        },
+        correct: "a"
+      },
+     {
+        question: "(C5.1) 1.An admissions office examines the correlation between students’ entrance exam scores and their grades after completing one year of college. In this scenario, students’ grades would be an example of",
+        answers: {
+             a: "criterion data.",
+            b: "employee development data.",
+            c: "satisfaction data.",
+            d: "motivation data."
+        },
+        correct: "a"
+      },
+      
+       {
+        question: "(C5.2) 15. Adaptive performance shares similarities with",
+        answers: {
+            a: "task performance.",
+            b: "contextual performance.",
+            c: "procedural performance.",
+            d: "counterproductive performance."
+        },
+        correct: "b"
+      },
+       
+       {
+        question: "(C5.3) 27. When a rater avoids choosing an extreme score, _____ error may occur.",
+        answers: {
+            a: "central tendency",
+            b: "leniency",
+            c: "severity",
+            d: "halo"
+        },
+        correct: "a"
+      },
+             
+     {
+        question: "(C6.1) 1. Staffing decisions are principally associated with:",
+        answers: {
+            a: "recruitment",
+            b: "selection",
+            c: "promotion",
+            d: "all of the above."
+        },
+        correct: "d"
+      },
+      {
+        question: "(C6.1) 2. According to a study described in the textbook, all of the following are consistent with international staffing practices except",
+        answers: {
+            a: "application forms are widely used for initial screening.",
+            b: "job descriptions are used infrequently.",
+            c: "cognitive ability tests are used less frequently.",
+            d: "interviews and references are the most common post-screening techniques."
+        },
+        correct: "b"
+      },
+ 
+      {
+        question: "(C6.2) 14. All of the following are common validity designs except",
+        answers: {
+            a: "correlation-related.",
+            b: "content-related.",
+            c: "criterion-related.",
+            d: "construct-related."
+        },
+        correct: "a"
+      },
+      
+
+      {
+        question: "(C6.2) 35. The percentage of the current workforce that is performing successfully is called the _____. ",
+        answers: {
+            a: "prediction error",
+            b: "selection ratio",
+            c: "cut score",
+            d: "base rate"
+        },
+        correct: "d"
+      },
+      
+ {
+        question: "(C7.1) 1. While attending a fire academy, trainees learn rules and procedures for various types of situations.This type of learning outcome is",
+        answers: {
+            a: "cognitive.",
+            b: "behavioral.",
+            c: "skill-based.",
+            d: "affective."
+        },
+        correct: "a"
+      },
+      
+
+{
+        question: "(C7.2) 38. Which type of job training is more common in European countries (e.g., Germany and Denmark) than in the United States?",
+        answers: {
+            a: "on-the-job training",
+            b: "apprenticeship",
+            c: "job rotation",
+            d: "programmed instruction"
+        },
+        correct: "b"
+      },
+      
+       {
+        question: "(C7.3) 41. The systematic collection of information that can be used to make effective training decisions is called",
+        answers: {
+            a: "training learning.",
+            b: "training assessment.",
+            c: "training evaluation.",
+            d: "training modification."
+        },
+        correct: "c"
+      },
+      
+ {
+        question: "(C8.1) 1. According to Maslow’s need theory, humans have ______ basic needs.",
+        answers: {
+            a: "1",
+            b: "2",
+            c: "3",
+            d: "5"
+        },
+        correct: "d"
+      },
+    
+ {
+        question: "(C8.2) 13. Which metaphor best describes Maslow’s need hierarchy? ",
+        answers: {
+            a: "person as judge",
+            b: "person as God-like",
+            c: "person as scientist",
+            d: "person as machine"
+
+
+        },
+        correct: "d"
+      },
+     
+   {
+        question: " (C8.3) 32. Goal-setting theory fits well with which of the following metaphors? ",
+        answers: {
+            a: "person as machine",
+            b: "person as scientist",
+            c: "person as intentional",
+            d: "person as judge"
+        },
+        correct: "c"
+      },
+      
+       {
+        question: " (C8.4) 48. The Motivational Trait Questionnaire measures",
+        answers: {
+            a: "whether an individual is motivated to complete a certain task.",
+            b: "six overlapping aspects of work motivation.",
+            c: "an individual’s predisposition to displaying certain traits.",
+            d: "six distinct aspects of general motivation."
+        },
+        correct: "d"
+      },
+ 
+ {
+        question: "(C9.1) 1. The first study that discovered the Hawthorne effect increased the amount of ______ in the work environment.",
+        answers: {
+            a: "feedback",
+            b: "heating",
+            c: "lighting",
+            d: "noise"
+        },
+        correct: "c"
+      },
+       
+ {
+        question: "(C9.2) 16. Which of the following is false concerning job satisfaction?",
+        answers: {
+            a: "The percentage of satisfied workers is about the same in most countries.",
+            b: "Very few people report dissatisfaction with their jobs.",
+            c: "There is fairly low correlation between overall satisfaction and performance.",
+            d: "The percentage of dissatisfied workers has been steadily decreasing."
+        },
+        correct: "d"
+      },
+     
+
+      {
+        question: "(C9.2) 36. The “progression hypothesis” is used to describe patterns of",
+        answers: {
+            a: "promotion.",
+            b: "commitment.",
+            c: "motivation.",
+            d: "withdrawal."
+        },
+        correct: "d"
+      },
+ {
+        question: "(C10.1) 2. The type of stress that motivates individuals to work hard and meet goals is called",
+        answers: {
+            a: "eustress.",
+            b: "poststress.",
+            c: "distress.",
+            d: "exhaustion."
+        },
+        correct: "a"
+      },
+      {
+        question: "(C10.1) 3. The type of stress that results from stressful situations that persist over time and produce negative health outcomes is called",
+        answers: {
+           a: "eustress.",
+            b: "poststress.",
+            c: "distress.",
+            d: "exhaustion."
+
+        },
+        correct: "c"
+      },
+
+ {
+        question: "(C10.2) 33. Which of the following models suggests that job demands and control are two prominent factors in producing stress?",
+        answers: {
+            a: "resistance-control",
+            b: "person-job fit",
+            c: "person-environment fit",
+            d: "demand-control"
+        },
+        correct: "d"
+      },
+      
+
+{
+        question: "(C10.3) 47. An employee is taught how to control her heart rate and blood pressure in order to deal with stress.This is an example of",
+        answers: {
+            a: "biofeedback.",
+            b: "stress inoculation.",
+            c: "hurry sickness.",
+            d: "tertiary prevention strategy."
+        },
+        correct: "a"
+      },
+      
+ 
+
+   {
+        question: "(C11.1) 1. According to the textbook, the Ludlow Massacre occurred because workers were denied",
+        answers: {
+            a: "respect",
+            b: "justice",
+            c: "pay",
+            d: "power"
+        },
+        correct: "b"
+      },
+      
+{
+        question: "(C11.3) 31. Which of the following is the type of demography that describes the method by which work groups are composed and changed?",
+        answers: {
+            a: "relational",
+            b: "interactional",
+            c: "organizational",
+            d: "procedural"
+        },
+        correct: "a"
+      },
+   
+
+ {
+        question: "(C12.1) 1. Which of the following refers to whether or not an individual becomes a leader? ",
+        answers: {
+            a: "leader emergence",
+            b: "leader evaluation",
+            c: "leader effectiveness",
+            d: "leader"
+        },
+        correct: "a"
+      },
+    {
+        question: "(C12.1) 2. Which of the Big 5 personality traits is not positively associated with leader emergence? ",
+        answers: {
+            a: "extraversion",
+            b: "conscientiousness",
+            c: "agreeableness",
+            d: "openness"
+        },
+        correct: "c"
+      },
+      
+
+       {
+        question: "(C12.2) 28. Which approach attempts to show that leaders possess certain characteristics that non-leaders do not?",
+        answers: {
+            a: "behavioral",
+            b: "power",
+            c: "trait",
+            d: "contingency"
+        },
+        correct: "c"
+      },
+      {
+        question: "(C12.2) 29. Examining “g” or intelligence as a predictor of effective leadership behavior would apply to which approach? ",
+        answers: {
+            a: "behavioral",
+            b: "power",
+            c: "trait",
+            d: "contingency"
+
+        },
+        correct: "c"
+      },
+ 
+ {
+        question: "(C12.3) 46. Which theory states that subordinates are categorized into either “in-groups” or “out-groups”?",
+        answers: {
+            a: "path-goal theory",
+            b: "LMX theory",
+            c: "situational theory",
+            d: "behavioral theory"
+        },
+        correct: "b"
+      },
+      
+
+ {
+        question: "(C13.1) 1. An interdependent collection of individuals who work toward a common goal and share responsibility for specific outcomes is called a",
+        answers: {
+            a: "group",
+            b: "team",
+            c: "in-group",
+            d: "crew"
+        },
+        correct: "b"
+      },
+   {
+        question: "(C13.1) 2. Which of the following typically involves six to twelve employees who meet regularly to identify work-related problems and generate ideas?",
+        answers: {
+            a: "project teams",
+            b: "production teams",
+            c: "quality circles",
+            d: "work groups"
+        },
+        correct: "c"
+      },
+ 
+{
+        question: "(C13.2) 31. The input-process-output model of team effectiveness ",
+        answers: {
+            a: "distills team operations so effectiveness can be measured.",
+            b: "provides a way to measure the cohesiveness of a team.",
+            c: "provides an instrument that allows researchers to quantitatively measure team performance.",
+            d: "provides a way to understand how teams perform."
+        },
+        correct: "d"
+      },
+  
+ {
+        question: "(C13.3) 46. All of the following should be kept in mind when conducting team evaluations except ",
+        answers: {
+            a: "team outputs will always take precedence over individual outputs, regardless of the organization.",
+            b: "both subjective and objective measures should be used whenever possible.",
+            c: "managers need to consider the extent to which team outputs are measurable.",
+            d: "it is important to exercise care in specifying team objectives."
+        },
+        correct: "a"
+      },
+       
+{
+        question: "(C14.1 1. A group of people who have common goals and who follow a set of operating procedures to develop products and services is called a(n) ",
+        answers: {
+            a: "organization.",
+            b: "bureaucracy.",
+            c: "democracy.",
+            d: "structure."
+        },
+        correct: "a"
+      },
+     {
+        question: "(C14.1) 2. Which of the following includes a formal hierarchy, division of labor, and a clear set of operating procedures?",
+        answers: {
+            a: "organization.",
+            b: "bureaucracy.",
+            c: "democracy.",
+            d: "structure."
+
+        },
+        correct: "b"
+      },
+ 
+{
+        question: "(C14.2) 30. Which of the following is not one of the types of climates described in the textbook?",
+        answers: {
+            a: "autocratic",
+            b: "democratic",
+            c: "laissez faire",
+            d: "bureaucratic"
+        },
+        correct: "d"
+      },
+     {
+        question: "(C14.2) 31. When employees “perceive” an organization, they consider four dimensions according to James and his colleagues (1996). Which of the following is not included among those dimensions?",
+        answers: {
+            a: "leadership facilitation and support",
+            b: "job challenge and leadership power",
+            c: "job challenge and autonomy",
+            d: "work group cooperation, friendliness, and warmth"
+        },
+        correct: "b"
+      },
+ {
+        question: "(C14.3) 45. Which of the following is not one of the three stages of the organizational change theory described by Kurt Lewin (1951)?",
+        answers: {
+            a: "unfreezing",
+            b: "freezing",
+            c: "changing",
+            d: "refreezing"
+        },
+        correct: "b"
+      }
+   
+
+
+
+
+];
+
+/* ---------------- SHUFFLE FUNCTION ---------------- */
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+/* ---------------- QUIZ LOGIC ---------------- */
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+const resultEl = document.getElementById("result");
+const restartBtn = document.getElementById("restartBtn");
+
+function loadQuestion() {
+    const q = questions[currentQuestion];
+
+    // Update progress text
+    document.getElementById("progress").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    questionEl.textContent = q.question;
+    answersEl.innerHTML = "";
+    nextBtn.style.display = "none";
+    answered = false;
+
+    for (let key in q.answers) {
+        const button = document.createElement("button");
+        button.textContent = q.answers[key];
+        button.onclick = () => selectAnswer(key);
+        answersEl.appendChild(button);
+    }
+}
+
+function selectAnswer(choice) {
+    if (answered) return;
+    answered = true;
+
+    const correctAnswer = questions[currentQuestion].correct;
+    const buttons = answersEl.querySelectorAll("button");
+    const answerKeys = Object.keys(questions[currentQuestion].answers);
+
+    buttons.forEach((button, index) => {
+        const key = answerKeys[index];
+        button.disabled = true;
+
+        if (key === correctAnswer) {
+            button.classList.add("correct");
+        }
+        if (key === choice && key !== correctAnswer) {
+            button.classList.add("incorrect");
+        }
+    });
+
+    if (choice === correctAnswer) {
+        score++;
+    }
+
+    nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+};
+
+function showResult() {
+    document.getElementById("quiz").style.display = "none";
+    resultEl.style.display = "block";
+    restartBtn.style.display = "block";
+
+    const percentage = Math.round((score / questions.length) * 100);
+    resultEl.textContent = `Your score: ${percentage}% (${score} out of ${questions.length})`;
+}
+
+restartBtn.onclick = () => {
+    currentQuestion = 0;
+    score = 0;
+
+    shuffleArray(questions);   // 🔀 Randomize again on restart
+
+    document.getElementById("quiz").style.display = "block";
+    resultEl.style.display = "none";
+    restartBtn.style.display = "none";
+    loadQuestion();
+};
+
+/* ---------------- START QUIZ ---------------- */
+
+shuffleArray(questions);  // 🔀 Randomize questions on first load
+loadQuestion();
+</script>
+
+</body>
+</html>
