@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>I-O Psychology Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .answers button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .answers button:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+
+        .correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .incorrect {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #nextBtn {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+
+        #result {
+            font-size: 1.3em;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #restartBtn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+    
+/* Mobile enhancements */
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: system-ui, Arial, sans-serif;
+}
+
+.container, .quiz-container {
+    max-width: 480px;
+    width: 100%;
+    margin: auto;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1em;
+    margin-top: 12px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+}
+
+.question {
+    font-size: 1.1em;
+    line-height: 1.4;
+}
+
+#questionImage {
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>I-O Psychology Quiz</h1>
+<div id="progress" style="text-align:center; font-weight:bold; margin-bottom:15px;"></div>
+
+<div id="quiz">
+    <div id="question" class="question"></div>
+    <img id="questionImage" style="display:none; max-width:100%; margin-bottom:15px;">
+    <div id="answers" class="answers"></div>
+    <button id="nextBtn">Next Question</button>
+</div>
+
+<div id="result" style="display:none;"></div>
+<button id="restartBtn" style="display:none;">Restart Quiz</button>
+
+<script>
+
+
+/* ---------------- QUESTIONS ---------------- */
+
+const questions = [
+    {
+        question: "All of the following methods are common to all sciences except:",
+        answers: {
+            a: "Science depends on data.",
+            b: "Science sets out to prove theories or hypotheses.",
+            c: "Science must be communicable, open, and public.",
+            d: "Scientists should be objective and not influenced by biases or prejudices."
+        },
+        correct: "b"
+    },
+ {
+        question: "Dr. Groeneveld is not able to include any treatments or conditions in an investigation of a new pay plan. Instead, he is gathering information about the effects of a new pay plan and making systematic observations about changes in performance based on this new pay plan. This type of research would best be classified as a(n)",
+        answers: {
+            a: "Quasi-experimental design",
+            b: "Experimental design",
+            c: "Non-experimental design",
+            d: "Survey design"
+
+        },
+        correct: "c"
+      },
+ {
+        question: "Dr. Brown is conducting a scientific experiment and has randomly assigned the participants into two training groups, which receive training programs. What type of research design is Dr. Brown using?",
+        answers: {
+            a: "Quasi-experimental design",
+            b: "Experimental design",
+            c: "Non-experimental design",
+            d: "Survey design"
+
+        },
+        correct: "b"
+      }, 
+{
+        question: "In I-O psychology, field studies are often non-experimental in design. All of the following help explain the popularity of non-experimental field studies except:",
+        answers: {
+            a: "The extent to which a laboratory experiment can reasonably simulate work is limited.",
+            b: "Laboratory experiments are more likely to use samples that are not representative of the population to which I-O psychologists would like to generalize.",
+            c: "Non-experimental designs in the field are most effective in leading to causal explanations.",
+            d: "In the field, workers can seldom be randomly assigned to conditions or treatments."
+
+        },
+        correct: "d"
+      },
+
+ {
+        question: "___________ methods rely heavily on tests, rating scales, questionnaires, and physiological measures, while ___________ methods of investigation generally produce flow diagrams and narrative descriptions of events or processes.",
+        answers: {
+            a: "Objective; Subjective",
+            b: "Subjective; Objective",
+            c: "Qualitative; Quantitative",
+            d: "Quantitative; Qualitative"
+
+        },
+        correct: "d"
+      },
+ {
+        question: "Dr. Young is in the process of combining information from multiple sources to test a theory. According to Rogelberg and Brooks-Laber (2002), this approach is referred to as",
+        answers: {
+            a: "Triangulation",
+            b: "Unification",
+            c: "Divergence",
+            d: "Convergence"
+
+        },
+        correct: "a"
+      },
+ {
+        question: "Each of the following helps increase how well the results of a study can be generalised to a larger population, except",
+        answers: {
+            a: "Collecting data at several different points in time.",
+            b: "Using a representative sample of the population being studied.",
+            c: "Making the sample size larger.",
+            d: "Collecting data from many different organizations."
+
+        },
+        correct: "c"
+      },
+ {
+        question: "All of the following are characteristics that can be used to describe a score distribution except:",
+        answers: {
+            a: "Mean",
+            b: "Significance",
+            c: "Skew",
+            d: "Median"
+
+        },
+        correct: "b"
+      },
+ {
+        question: "Inferential statistics are used to:",
+        answers: {
+            a: "extrapolate data into the future.",
+            b: "compare the results of different analyses.",
+            c: "reveal patterns in a set of data.",
+            d: "draw a conclusion based on results from sample data."
+
+        },
+        correct: "d"
+      },
+ {
+        question: "A correlation of r = –.79 indicates that there is a:",
+        answers: {
+            a: "high negative association between two variables.",
+            b: "high positive association between two variables.",
+            c: "low negative association between two variables.",
+            d: "low positive association between two variables."
+
+        },
+        correct: "a"
+      },
+ {
+        question: "If a measurement is ________ , we get the same values every time we use the measurement. If a measurement is _________, we obtain incorrect information.",
+        answers: {
+            a: "Valid; not reliable",
+            b: "Reliable; valid",
+            c: "Reliable; not valid",
+            d: "Valid; reliable"
+
+        },
+        correct: "c"
+      },
+ {
+        question: "A research design in which the independent variable is manipulated and in which participants are randomly assigned to a condition is named a:",
+        answers: {
+            a: "quasi-experiment",
+            b: "field study",
+            c: "survey",
+            d: "experiment"
+
+        },
+        correct: "d"
+      },
+ {
+        question: "All of the following are fundamental assumptions that I-O psychologists make when they apply the individual differences model except:",
+        answers: {
+            a: "The attribute levels of various people in a group can be brought to the same level through training.",
+            b: "Different jobs require different attributes.",
+            c: "Adults have a variety of attributes, the levels of which remain relatively stable over time.",
+            d: "The attributes can be measured accurately."
+
+        },
+        correct: "a"
+      },
+ {
+        question: "Measures of g assess all of the following except:",
+        answers: {
+            a: "Knowledge acquisition.",
+            b: "Perceptual ability.",
+            c: "Reasoning ability.",
+            d: "Problem-solving ability."
+
+        },
+        correct: "b"
+      },
+ {
+        question: "As the complexity of a job ___________, the predictive value of general intelligence tests ___________.",
+        answers: {
+            a: "increases; stays the same.",
+            b: "increases; decreases.",
+            c: "increases; increases.",
+            d: "decreases; stays the same."
+
+        },
+        correct: "c"
+      },
+ {
+        question: "Which of the following is false concerning the Five Factor Model?",
+        answers: {
+            a: "It gives a representation of how a person typically responds to people and events.",
+            b: "It describes the potential importance of personality variables in understanding job performance.",
+            c: "It is the result of both statistical analyses and a conceptual analysis.",
+            d: "It can be used to identify evidence of psychopathology."
+
+        },
+        correct: "b"
+      },
+ {
+        question: "Please have a look at the figure below. Changing the cut-off score from X' to W' leads to:",
+	image: "question_1.png",
+        answers: {
+            a: "only a decrease in false positives",
+            b: "only an increase in false negatives",
+            c: "an increase in false positives and a decrease in false negatives",
+            d: "a decrease in false positives and an increase in false negatives"
+
+        },
+        correct: "d"
+      },
+    
+  {
+        question: "Skills are",
+        answers: {
+            a: "Practiced acts.",
+            b: "Innate abilities.",
+            c: "Always technically-based.",
+            d: "Not dependent on certain abilities."
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "Caroline possesses a combination of skills, knowledge, abilities, and personality characteristics that allow him to complete his project management tasks. What are the sets of behaviors called that allow him to do his job well?",
+        answers: {
+            a: "Proficiencies",
+            b: "Competencies",
+            c: "Behavioral categories",
+            d: "Individual difference characteristics"
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "A test battery is a",
+        answers: {
+            a: "method of combining incongruent test results.",
+            b: "special tool used to administer a test.",
+            c: "test taken over a very long period of time (e.g., 2 years).",
+            d: "collection of tests rather than a single test."
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "All of the following are true of speed tests except:",
+        answers: {
+            a: "They have rigid and demanding time limits.",
+            b: "They may reduce the risk of legal challenges.",
+            c: "Most test takers are unable to finish them in the allotted time.",
+            d: "The emphasis on speed may introduce unfairness."
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "Which of the following is false concerning tests of psychomotor abilities?",
+        answers: {
+            a: "They may involve complex tasks or simple actions.",
+            b: "They usually involve a task that requires dexterity.",
+            c: "They involve the coordinated movement of the limbs.",
+            d: "Ideally, they should be administered for all jobs."
+
+        },
+        correct: "b"
+      },
+{
+        question: "Sarah, in an interview for a Disc Jockey position, was asked to describe how she would respond to a dissatisfied client. She most likely experienced what type of interview?",
+        answers: {
+            a: "Behavioral interview",
+            b: "Hypothetically-based interview",
+            c: "Situational interview",
+            d: "Unstructured interview"
+
+        },
+        correct: "c"
+      },
+{
+        question: "In a work sample test, the task assigned and the equipment used to complete the task:",
+        answers: {
+            a: "Are very general, so the test can be used for any position.",
+            b: "Will often lead to non-valid results.",
+            c: "Should only be somewhat relevant to the actual job.",
+            d: "Are designed to be realistic simulations of the actual job."
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "Dominic has interviewed and given a paper and pencil test to a number of people applying for a job at his company. He notices that the validity of the paper and pencil test of general mental ability is moderate, and that the validity of the test combined with the interview is significantly higher. He might conclude that the value of the interview is:",
+        answers: {
+            a: "negligible.",
+            b: "incremental.",
+            c: "observable.",
+            d: "nonexistent."
+
+        },
+        correct: "b"
+      },
+{
+        question: "The outcomes most commonly predicted by drug tests are:",
+        answers: {
+            a: "Poor performance and apathy.",
+            b: "Voluntary terminations and aggression.",
+            c: "Absenteeism and involuntary terminations.",
+            d: "Absenteeism and poor performance."
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "What is not part of the five-factor model of personality (Big Five)?",
+        answers: {
+            a: "openness",
+            b: "neuroticism",
+            c: "individualism",
+            d: "extraversion"
+
+        },
+        correct: "c"
+      },
+{
+        question: "The generic competence setting priorities can be measured most efficiently by using:",
+        answers: {
+            a: "the 'in-basket method'",
+            b: "a situational judgment test",
+            c: "an unstructured interview",
+            d: "a g-test (intelligence test)"
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "All of the following are direct determinants of job performance except:",
+        answers: {
+            a: "motivation",
+            b: "procedural knowledge and skill.",
+            c: "personality factors.",
+            d: "declarative knowledge."
+
+        },
+        correct: "c"
+      },
+{
+        question: "According to Campbell, which of the following is a performance component that is essential at some level for every job?",
+        answers: {
+            a: "Demonstrated effort.",
+            b: "Motivation.",
+            c: "Personal accountability.",
+            d: "General proficiency."
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "A help-desk operator's performance at Chips and Bytes Computer Company is evaluated by assessing the number of calls he takes on any given day. The other aspects of his job (e.g., customer satisfaction) are not included. The resulting performance measure would be considered a(n)",
+        answers: {
+            a: "Actual criterion",
+            b: "Ultimate criterion",
+            c: "Contaminated criterion",
+            d: "Deficient criterion"
+
+        },
+        correct: "d"
+      },
+{
+        question: "Next to being a full time student, Benjamin has a part time job at the call center of a large telecom company. Every day he is successful in solving most incoming error messages within a short period of time. As a consequence, he often uses the extra spare time to take lengthy smoking breaks. These are examples of:",
+        answers: {
+            a: "expert performance & adaptive performance",
+            b: "adaptive performance & organizational citizenship behavior",
+            c: "task performance & counterproductive work behavior",
+            d: "expert performance & counterproductive work behavior"
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "John works at Lunar Company as an administrative assistant. He often volunteers to do additional tasks to help others and consistently puts in extra effort in completing his own tasks. This is an example of",
+        answers: {
+            a: "contextual performance.",
+            b: "task performance.",
+            c: "adaptive performance.",
+            d: "overall performance."
+
+        },
+        correct: "d"
+      },
+{
+        question: "All of the following are circumstances of today's workplace that seem to require adaptive performance except:",
+        answers: {
+            a: "Reliance on the status quo",
+            b: "Globalization",
+            c: "Changing technologies",
+            d: "Corporate restructuring"
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "Sheryl is frustrated with her job and, in recent weeks, has been sabotaging the projects of her coworkers. This is an example of",
+        answers: {
+            a: "revenge",
+            b: "performance monitoring",
+            c: "hostile action",
+            d: "counterproductive behavior"
+
+        },
+        correct: "d"
+      },
+{
+        question: "All of the following are purposes of a job analysis except:",
+        answers: {
+            a: "To determine the necessary human attributes.",
+            b: "To determine how tasks are carried out.",
+            c: "To decide who to hire for a position.",
+            d: "To understand the important tasks of a job."
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "What is cognitive task analysis?",
+        answers: {
+            a: "A method of distilling job performance into measurable units.",
+            b: "A precursor to the think-aloud protocol.",
+            c: "A job analysis method that focuses on specific tasks.",
+            d: "A technique used to quantify job analysis information."
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "A company intends to measure work performance, yet they discover that many measurement items actually measure information that is unrelated to what they want to measure. This problem is an example of:",
+        answers: {
+            a: "Criterion deficiency",
+            b: "An actual criterion",
+            c: "An ultimate criterion",
+            d: "Criterion contamination"
+
+        },
+        correct: "a"
+      },
+{
+        question: "Behaviorally Anchored Rating Scales (BARS), Behavioral Observation Scales (BOS) and Paired Comparison Ranking are threemethods to rate a worker's performance. Which of the following statements are correct?",
+        answers: {
+            a: "It is easier to develop a BOS-scale than to develop a BARS-scale.",
+            b: "BARS-scales are better suited to provide feedback than paired comparison ranking",
+            c: "A and B are both correct",
+            d: "A and B are both incorrect"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "Which factors will not increase the acceptance of negative feedback?",
+        answers: {
+            a: "Comparing the performance of the subordinate with the performance of relevant peers",
+            b: "The supervisor and subordinate agree on the definition of good and poor performance",
+            c: "The supervisor focuses on ways to improve performance rather than documenting poor performance",
+            d: "The supervisor and subordinate agree on the subordinate's job duties"
+
+        },
+        correct: "a"
+      },
+{
+        question: "Which of the following is false concerning performance measures?",
+        answers: {
+            a: "Relationships among different types are generally low to moderate.",
+            b: "They are interchangeable and may be substituted for one another.",
+            c: "Each type gives a different perspective on performance.",
+            d: "There are low correlations between supervisory ratings and objective measures."
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "All of the following are likely to make employees feel more positively toward performance monitoring except:",
+        answers: {
+            a: "They believe the activities monitored are job relevant.",
+            b: "They are able to delay or prevent monitoring at particular times.",
+            c: "They are aware when it is taking place so they can censor their actions.",
+            d: "They are able to participate in the design of the monitoring system."
+
+        },
+        correct: "c"
+      },
+{
+        question: "Performance ___________ systems are developed by HR and handed to managers to use in evaluation of subordinates; performance ___________ feedback occurs whenever a supervisor or subordinate feels a discussion about expectations and performance is necessary.",
+        answers: {
+            a: "criteria; management",
+            b: "management; criteria",
+            c: "appraisal; management",
+            d: "management; appraisal"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "A performance rating form used for administrative purposes would be least valid for which of the following circumstances?",
+        answers: {
+            a: "Salary adjustment",
+            b: "Employee feedback",
+            c: "Promotion",
+            d: "Firing"
+
+        },
+        correct: "d"
+      },
+{
+        question: "Which of the following is false concerning task-based ratings?",
+        answers: {
+            a: "They tend to be the most easily defended in court.",
+            b: "They are generally most easily accepted by incumbents.",
+            c: "The rating systems are usually direct extensions of job analysis.",
+            d: "They rely on some trait analysis for accuracy."
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "When central tendency error occurs, it is often observed that:",
+        answers: {
+            a: "average performers receive the best scores.",
+            b: "an extreme score is avoided in favor of a safe score.",
+            c: "average performers are favored.",
+            d: "extreme scores are chosen to move people away from the mean."
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "Julie is reluctant to assign bad ratings for her subordinates for fear of ruffling feathers. As a result, she tends to be unusually easy in her ratings. Julie is committing what type of error?",
+        answers: {
+            a: "Central tendency error",
+            b: "Halo error",
+            c: "Leniency error",
+            d: "Severity error"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "James works at Solar Company and has just undergone a performance review. He feels that the process by which the ratings were assigned was unfair. Which type of justice issue is this?",
+        answers: {
+            a: "Interpersonal justice",
+            b: "Operational justice",
+            c: "Distributive justice",
+            d: "Procedural justice"
+
+        },
+        correct: "d"
+      },
+{
+        question: "Which of the following is LEAST likely to be a high performance work practice?",
+        answers: {
+            a: "Use of formal job analyses",
+            b: "Merit based promotions",
+            c: "Use of clinical decision making to hire for line jobs",
+            d: "Use of formal assessment devices for selection"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "What is the relationship called between the number of individuals actually hired and the number assessed?",
+        answers: {
+            a: "Selection ratio",
+            b: "Assessment ratio",
+            c: "Correlate ratio",
+            d: "Applicant ratio"
+
+        },
+        correct: "a"
+      },
+{
+        question: "Dana was recently hired by Solar Company after going through its staffing process. Her test results placed her above the cut score. Unfortunately, her performance has been less than satisfactory and Dana's manager is beginning to think that the wrong person was hired. Dana's case might be an example of what type of error?",
+        answers: {
+            a: "False negative",
+            b: "True negative",
+            c: "False positive",
+            d: "True positive"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "What is one consequence of increasing a cut score?",
+        answers: {
+            a: "Fewer hires will be above average performers",
+            b: "Fewer candidates need be assessed",
+            c: "More false positive errors",
+            d: "More false negative errors"
+
+        },
+        correct: "c"
+      },
+{
+        question: "An organization is looking to hire individuals to fill 8 positions. So far, 20 people have applied for these jobs. What is the selection ratio?",
+        answers: {
+            a: ".40",
+            b: ".44",
+            c: "2.25",
+            d: "2.50"
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "In __________ decision making, information is combined according to a mathematical formula. In _________ decision making, the relative value of one candidate versus another is weighed in the decision maker's head.",
+        answers: {
+            a: "statistical; actuarial",
+            b: "actuarial; statistical",
+            c: "clinical; statistical",
+            d: "statistical; clinical"
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "The staffing system at Modular Company involves a process whereby a candidate must successfully pass a cognitive ability test before being allowed to take the physical ability test. This is an example of a",
+        answers: {
+            a: "compensatory system.",
+            b: "hurdle system.",
+            c: "multiple hurdle system.",
+            d: "paired system."
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "__________ is a relatively permanent change in behavior and human characteristics, while __________ is the systematic acquisition of skills, concepts, or attitudes that results in improved performance in another environment.",
+        answers: {
+            a: "Teaching; learning",
+            b: "Learning; teaching",
+            c: "Learning; training",
+            d: "Training; learning"
+
+        },
+        correct: "c"
+      },
+{
+        question: "All of the following are considered broad categories of learning outcomes except:",
+        answers: {
+            a: "Skill-based outcomes",
+            b: "Declarative outcomes",
+            c: "Cognitive outcomes",
+            d: "Affective outcomes"
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "Mary, an HR professional, is currently attending a training program where she is learning how to use a new computer program. She is not averse to making mistakes, often using them as an opportunity to further understand the computer program and add to her own knowledge. Mary might be characterized as having a",
+        answers: {
+            a: "limited orientation.",
+            b: "cognitive orientation.",
+            c: "performance orientation.",
+            d: "mastery orientation."
+
+        },
+        correct: "d"
+      },
+{
+        question: "John's company offers a variety of training methods to learn skills. He is currently participating in one program that is often used to prepare high-potential employees for future management responsibilities, providing him with a variety of experiences in different departments that will likely help him obtain future promotions. What type of training method is he most likely participating in?",
+        answers: {
+            a: "Classroom instruction",
+            b: "Mentoring",
+            c: "Apprenticeship",
+            d: "Job rotation"
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "Julie is currently in a training program for all managers at a certain level in her company. All of the trainees are exposed to the same material which is presented in a very sequential manner. Whether or not she grasps a specific concept is of no consequence to the presentation of the material. What type of programmed instruction is she most likely experiencing?",
+        answers: {
+            a: "Branching programming",
+            b: "Linear programming",
+            c: "Inclusive programming",
+            d: "Reinforcement programming"
+
+        },
+        correct: "b"
+      },
+{
+        question: "Which of the following statements about Kirkpatrick's four-level training criteria taxonomy is correct?",
+        answers: {
+            a: "Research has shown that level-1 affective reactions are more closely linked with learning and behavioral criteria than are level-1 utility reactions.",
+            b: "Transfer of training corresponds to level 3: behavior.",
+            c: "Both statements are correct.",
+            d: "Both statements are incorrect."
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "Utility analysis is a technique that assesses:",
+        answers: {
+            a: "the return on investment of training.",
+            b: "the overall usefulness of a training program.",
+            c: "how easy it is to implement a training program.",
+            d: "assesses the influence of training on performance."
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "Motivation concerns the conditions responsible for variations in intensity, quality, and _________ of ongoing behavior.",
+        answers: {
+            a: "amplitude",
+            b: "satisfaction",
+            c: "direction",
+            d: "learning"
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "Kate recently bought a new car: a Sports Utility Vehicle (SUV). However, shortly afterwards, various Dutch and foreign car tests indicated that this type of SUV has the tendency to rollover when taking sharp turns at a high velocity. Kate reads these messages, yet discards them. That is, she argues that these tests are probably not reliable. In addition, only on rare occasions she needs to take sharp turns thus this is not really applicable to her situation. She decides not to return the car to the car dealer. Which theory explains Kate's way of thinking?",
+        answers: {
+            a: "VIE theory",
+            b: "Control theory",
+            c: "Dissonance theory",
+            d: "Path-goal theory"
+
+        },
+        correct: "c"
+      },
+{
+        question: "Jane is a call agent at a large service organization. Her manager sets challenging performance goals (for example, solve at least 20% of the incoming error messages by phone). She is very successful in attaining these goals and her confidence to perform all necessary tasks to be a good call agent has increased. This is an example of increased self-efficacy by:",
+        answers: {
+            a: "Modeling",
+            b: "Mastery experience",
+            c: "Social persuasion",
+            d: "Physiological state"
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "What is the basic model for considering the role of motivation in performance?",
+        answers: {
+            a: "Performance = (Motivation x Ability) + Situational constraints",
+            b: "Performance = (Motivation x Ability) – Situational constraints",
+            c: "Performance = (Motivation x Situational constraints) + Ability",
+            d: "Performance = (Motivation / Situational constraints) + Ability"
+
+        },
+        correct: "b"
+      },
+{
+        question: "Maslow's model fits the person-as-machine metaphor well. Which of the following is false concerning the model?",
+        answers: {
+            a: "A person will respond to whatever satisfies the lowest level unfulfilled need.",
+            b: "Workers in the same department are assumed to be at the same needs level.",
+            c: "The behavior of the individual is unconscious and automatic.",
+            d: "An employer needs to know at what need level a worker is operating."
+
+       },
+        correct: "b"
+      },
+
+{
+        question: "What is a major problem associated with using contingent reinforcement?",
+        answers: {
+            a: "The approach has little or no role for any cognitive activity.",
+            b: "The approach cannot consistently predict motivation.",
+            c: "The approach makes too many assumptions of behavior.",
+            d: "The approach is not applicable in today's workplace."
+
+        },
+        correct: "a"
+      },
+{
+        question: "The feedback loop in goal setting theory deals with the discrepancy between:",
+        answers: {
+            a: "Actual goal accomplishment and expected goal accomplishment of peers.",
+            b: "Actual goal accomplishment and the failures the person has experienced.",
+            c: "Actual goal accomplishment and the goal to which the person was committed.",
+            d: "Actual goal accomplishment and the actual goal accomplishment of peers."
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "Which motivation-intervention includes participation, goal setting, and feedback to increase motivation and performance?",
+        answers: {
+            a: "Job enrichment",
+            b: "Behavioral Management",
+            c: "ProMES",
+            d: "All three interventions do"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "In the field of job enrichment, the Job Characteristics Model, developed by Hackman and Oldham, contains five job characterics that together determine the motivating potential of a job. Which of the following is not one of the five characteristics?",
+        answers: {
+            a: "Social support",
+            b: "Feedback",
+            c: "Skill variety",
+            d: "Task significance"
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "Which type of job satisfaction describes the extent to which an employee is satisfied with aspects such as pay, status and working conditions?",
+        answers: {
+            a: "global",
+            b: "facet",
+            c: "intrinsic",
+            d: "normative"
+
+        },
+        correct: "b"
+      },
+{
+        question: "All of the following are true of the Job Descriptive Index except:",
+        answers: {
+            a: "It includes a separate overall satisfaction measure.",
+            b: "It doesn't provide much information about issues like independence.",
+            c: "The actual questionnaire is fairly short.",
+            d: "It assesses satisfaction with five distinct areas of work."
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "_______________ is related to the work that individuals do, while ________________ concerns whether employees are satisfied with aspects such as pay or benefits.",
+        answers: {
+            a: "Extrinsic satisfaction; intrinsic satisfaction",
+            b: "Intrinsic satisfaction; extrinsic satisfaction",
+            c: "Facet satisfaction; extrinsic satisfaction",
+            d: "Extrinsic satisfaction; facet satisfaction"
+
+        },
+        correct: "b"
+      },
+
+{
+        question: "___________ are generalized feeling states that are not intense enough to interrupt ongoing work, whereas ____________ are normally associated with specific events or occurrences.",
+        answers: {
+            a: "Emotions; Moods",
+            b: "Moods; Emotions",
+            c: "Feelings; Moods",
+            d: "Moods; Feelings"
+
+        },
+        correct: "b"
+      },
+{
+        question: "Which of the following statements is incorrect concerning affectivity?",
+        answers: {
+            a: "Positive people tend to be more satisfied with their jobs than negative people.",
+            b: "Affectivity as measured in adolescence predicts later job satisfaction.",
+            c: "Neuroticism is often referred to as positive affectivity.",
+            d: "Job satisfaction and affectivity have reciprocal influences on each other."
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "All of the following are elements of core evaluations except:",
+        answers: {
+            a: "Locus of control",
+            b: "Self-efficacy",
+            c: "Stimuli observation",
+            d: "Absence of neuroticism"
+
+        },
+        correct: "c"
+      },
+
+{
+        question: "Organizational commitment includes all of the following elements except:",
+        answers: {
+            a: "A desire to contribute positively to the work-life of others.",
+            b: "Acceptance and belief in an organization's values.",
+            c: "A strong desire to remain in the organization.",
+            d: "A willingness to exert effort on behalf of the organization."
+
+        },
+        correct: "a"
+      },
+
+{
+        question: "When Tim thinks back to the incident yesterday with the customer, he feels himself getting angry again and subsequently has trouble focusing on his tasks. Tim apparently experienced:",
+        answers: {
+            a: "Prospective mood.",
+            b: "Prospective emotion.",
+            c: "Retrospective mood.",
+            d: "Retrospective emotion."
+
+        },
+        correct: "d"
+      },
+
+{
+        question: "__________ provides challenges that motivate individuals to work hard and meet their goals, while ___________ results from stressful situations that persist over time and produces negative health outcomes.",
+        answers: {
+            a: "Eustress; stress",
+            b: "Stress; eustress",
+            c: "Distress; eustress",
+            d: "Eustress; distress"
+
+        },
+        correct: "d"
+      },
+{
+        question: "All of the following are true of the General Adaptation Syndrome except:",
+        answers: {
+            a: "The sequence of stages varies depending on the trauma.",
+            b: "In the alarm stage, the body releases stress hormones.",
+            c: "While coping with the source of stress, resistance to other stressors decreases.",
+            d: "Burnout, illness, and death may result unless stress is reduced."
+
+        },
+        correct: "a"
+      },
+{
+        question: "Problem-focused coping:",
+        answers: {
+            a: "involves avoiding and minimizing the problem.",
+            b: "has to do with reducing the emotional response to the problem.",
+            c: "involves creating a new and larger problem as a distraction.",
+            d: "is directed at managing the problem that is causing the stress."
+
+        },
+        correct: "d"
+      },
+{
+        question: "Josh works at Lunar Company and has just been assigned to a very important project that will require a great deal of time and dedication. He has also just been elected president of the parent association at his daughter's school. Josh doesn't know how he will be able to handle them both. What might this be an example of?",
+        answers: {
+            a: "Role conflict",
+            b: "Role ambiguity",
+            c: "Job overload",
+            d: "Job ambiguity"
+
+        },
+        correct: "a"
+      },
+{
+        question: "A moderator is",
+        answers: {
+            a: "a variable that affects the direction or strength of the association between two other variables.",
+            b: "an objective element in the stressor-strain relationship that starts the stress reaction in individuals.",
+            c: "a method by which an individual can consciously halt the stressor-strain reaction.",
+            d: "an element that recognizes the relationship between two variables and serves to magnify the strength of the variables."
+
+        },
+        correct: "a"
+      },
+{
+        question: "All of the following are characteristics of a person described as having a hardy personality except:",
+        answers: {
+            a: "The feel a sense of commitment to their goals.",
+            b: "They feel they are in control of their lives.",
+            c: "They are critical of their environment.",
+            d: "They see unexpected change as a challenge."
+
+        },
+        correct: "c"
+      },
+{
+        question: "Which strategy is concerned with modifying or eliminating stressors in the work environment?",
+        answers: {
+            a: "Primary prevention strategy",
+            b: "Secondary prevention strategy",
+            c: "Tertiary prevention strategy",
+            d: "None of the above"
+
+        },
+        correct: "a"
+      },
+{
+        question: "Stress inoculation consists of all of the following except:",
+        answers: {
+            a: "Education",
+            b: "Reflection",
+            c: "Rehearsal",
+            d: "Application"
+
+        },
+        correct: "b"
+      },
+{
+        question: "Procedural justice is concerned with:",
+        answers: {
+            a: "The possibility of influencing a process or outcome.",
+            b: "The perceived fairness of the allocation of outcomes to members.",
+            c: "The process by which rewards are distributed.",
+            d: "The sensitivity with which employees are treated."
+
+        },
+        correct: "c"
+      },
+{
+        question: "Two separate facets of interactional justice are:",
+        answers: {
+            a: "Interpersonal and informational justice",
+            b: "Interpersonal and environmental justice",
+            c: "Environmental and social justice",
+            d: "Informational and comparative justice"
+
+        },
+        correct: "a"
+      },
+{
+        question: "Sarah has just had a performance review. She is frustrated with the unprofessional manner in which her manager conducted the review, even though the review was very positive and encouraging. Sarah is concerned about which type of justice?",
+        answers: {
+            a: "Evaluative",
+            b: "Distributive",
+            c: "Procedural",
+            d: "Interactional"
+
+        },
+        correct: "c"
+      },
+{
+        question: "All of the following conditions would most likely lead to an experience of fairness during performance reviews except:",
+        answers: {
+            a: "The supervisor was familiar with the duties and responsibilities of the subordinate.",
+            b: "The supervisor relied on only those he/she most trusted to provide peer reviews.",
+            c: "The supervisor provided suggestions on how to improve performance.",
+            d: "The supervisor had an adequate opportunity to observe the subordinate at the workplace."
+
+        },
+        correct: "b"
+      },
+{
+        question: "Which term is used to describe the method by which work groups and organizations are composed and changed?",
+        answers: {
+            a: "Morphing composition",
+            b: "Relational demography",
+            c: "Diversification",
+            d: "Composition transformation"
+
+        },
+        correct: "b"
+      },
+{
+        question: "All of the following are characteristics of organizations most likely to manage diversity successfully except:",
+        answers: {
+            a: "They foster diversity only in formal levels of the organization.",
+            b: "They take steps to reduce interpersonal conflict.",
+            c: "They exhibit diversity at every level.",
+            d: "They uncover and root out bias and discriminatory practices."
+
+        },
+        correct: "a"
+      },
+{
+        question: "The _______________ assumes there are no advantages for a diverse workforce since all employees share the same values and culture, while the ________________ often leads to justice and fairness debates.",
+        answers: {
+            a: "assimilation model; value model",
+            b: "value model; assimilation model",
+            c: "protection model; assimilation model",
+            d: "assimilation model; protection model"
+
+        },
+        correct: "d"
+      },
+{
+        question: "Vincent, Toine, and Mario are working together on a group assignment. Today, they agreed to meet at 9am. Vincent and Toine both are punctual, but Mario is not there. Both Vincent and Toine are getting irritated because they have to wait. Fifteen minutes late, Mario walks in, takes some coffee and eventually joins Vincent and Toine. He is very cheerful and is completely unaware that he did something 'wrong'. After all, 'being late' is not a deadly sin in his opinion. What kind of diversity is this?",
+        answers: {
+            a: "Demographic diversity",
+            b: "Distributive diversitity",
+            c: "Complementary diversitity",
+            d: "Psychological diversity"
+
+        },
+        correct: "d"
+      },
+{
+        question: "If a researcher is studying the characteristics of individuals who become leaders, he or she would particularly be interested in ______________.",
+        answers: {
+            a: "leader treatment",
+            b: "leadership effectiveness",
+            c: "leader emergence",
+            d: "leadership ability"
+
+        },
+        correct: "c"
+      },
+{
+        question: "All of the following are personality characteristics that are associated with individuals who emerge as leaders except:",
+        answers: {
+            a: "Emotional stability",
+            b: "Agreeableness",
+            c: "Extraversion",
+            d: "Openness to experience"
+
+        },
+        correct: "b"
+      },
+{
+        question: "All of the following are descriptive of the more modern approach to trait theory except:",
+        answers: {
+            a: "It defines personality traits behaviorally.",
+            b: "It considers traits in the context of organizational/situational variables.",
+            c: "It has not had the success of traditional trait theory.",
+            d: "It includes a general consensus on the meaning of personality traits."
+
+        },
+        correct: "c"
+      },
+{
+        question: "Most leadership training programs concentrate on developing, maintaining, or enhancing individual attributes. This is most accurately described as an example of:",
+        answers: {
+            a: "behavior development",
+            b: "personality development",
+            c: "leadership development",
+            d: "leader development"
+
+        },
+        correct: "d"
+      },
+{
+        question: "The researchers at Ohio State University pursued an approach that dealt with two dimensions: consideration and initiating structure. Which general leadership approach did they utilize?",
+        answers: {
+            a: "Maturity approach",
+            b: "Contingency approach",
+            c: "New trait theory",
+            d: "Behavioral approach"
+
+        },
+        correct: "d"
+      },
+{
+        question: "What is the general notion behind the contingency approach?",
+        answers: {
+            a: "Any tactic should be backed up by an alternate course of action.",
+            b: "The success of any given tactic depends upon multiple factors or situations.",
+            c: "The ability of one factor to influence another factor is inherently ambiguous.",
+            d: "Multiple factors must be considered in developing a course of action."
+
+        },
+        correct: "b"
+      },
+{
+        question: "______________ leadership is best when the job is boring or the subordinate lacks self-confidence, whereas ____________ leadership is most effective when the job is not clearly defined.",
+        answers: {
+            a: "Supportive; directive",
+            b: "Directive; supportive",
+            c: "Participative; directive",
+            d: "Directive; participative"
+
+        },
+        correct: "d"
+      },
+{
+        question: "Which of the following is characteristically true of out-group members?",
+        answers: {
+            a: "They are more likely to stay in an organization.",
+            b: "They view exchanges with their leaders as simply contractual.",
+            c: "They see themselves as involved in valuable knowledge exchange.",
+            d: "Their leaders initiate discussions about personal matters with them."
+
+        },
+        correct: "b"
+      },
+{
+        question: "Which of the following is a criticism of the Multifactor Leadership Questionnaire?",
+        answers: {
+            a: "It is based on only one theory, that of transactional leadership theory.",
+            b: "It is unclear how many transactional and transformational strategies there are.",
+            c: "It is overly long and often frustrates the test takers.",
+            d: "It tends to be imprecise in measuring what it says it is measuring."
+
+        },
+        correct: "b"
+      },
+{
+        question: "As a manager, Sofia has to ensure that her team surpasses the sales of the previous year. Together with all team members she thinks of various incentives intended to increase the commitment of all members to attain this goal. At the end of the year, the team indeed has reached its target. How do we call this type of leadership?",
+        answers: {
+            a: "Attempted leadership",
+            b: "Successful leadership",
+            c: "Effective leadership",
+            d: "Accepted leadership"
+
+        },
+        correct: "c"
+      },
+{
+        question: "What type of leadership is considered the most effective type of leadership according to the Full range theory of leadership by Bass and Avolio?",
+        answers: {
+            a: "Active management by exception",
+            b: "Transactional leadership",
+            c: "Transformational leadership",
+            d: "Charismatic leadership"
+
+        },
+        correct: "c"
+      },
+{
+        question: "What does research indicate about the success of quality circles?",
+        answers: {
+            a: "They are most successful in the short term.",
+            b: "They are most successful in the long term.",
+            c: "They are successful in both the short term and long term.",
+            d: "They are generally not successful."
+
+        },
+        correct: "a"
+      },
+{
+        question: "All of the following are true of project teams except:",
+        answers: {
+            a: "They are ongoing and have a long history that helps them develop cohesiveness.",
+            b: "Team members come from different departments or functions.",
+            c: "They are created to solve a particular problem or set of problems.",
+            d: "They are dependent upon client preferences."
+
+        },
+        correct: "c"
+      },
+{
+        question: "A(n) _______________ has control over a variety of its functions including planning shift operations.",
+        answers: {
+            a: "project team",
+            b: "quality circle",
+            c: "autonomous work group",
+            d: "virtual team"
+
+        },
+        correct: "c"
+      },
+{
+        question: "_____________ include exchanging ideas without criticism, whereas _____________ include soliciting team members feedback on the process the team is using to accomplish its goals.",
+        answers: {
+            a: "Virtual-collaboration skills; virtual-communication skills",
+            b: "Virtual-communication skills; virtual-collaboration skills",
+            c: "Virtual-socialization skills; virtual-collaboration behaviors",
+            d: "Virtual-collaboration behaviors; virtual-socialization skills"
+
+        },
+        correct: "d"
+      },
+{
+        question: "All of the following are team inputs except:",
+        answers: {
+            a: "Team task",
+            b: "Team composition",
+            c: "Norms",
+            d: "Organizational context"
+
+        },
+        correct: "b"
+      },
+{
+        question: "Shared mental models:",
+        answers: {
+            a: "are a method for team members to employ similar thought processes.",
+            b: "are organized ways for team members to think about how the team will work.",
+            c: "allow for the study and measurement of individual thought processes.",
+            d: "bring together like-minded individuals to create a more cohesive team."
+
+        },
+        correct: "b"
+      },
+{
+        question: "Team norms may develop through all of the following except:",
+        answers: {
+            a: "Mandatory directives issued by the organization.",
+            b: "Explicit statements by team members.",
+            c: "The first behavior pattern that emerges in the team.",
+            d: "Carry-over behaviors from past situations."
+
+        },
+        correct: "a"
+      },
+{
+        question: "The tendency called for groups to make decisions that are more extreme than those made by individuals is called:",
+        answers: {
+            a: "Extremity phenomenon",
+            b: "Extreme thinking",
+            c: "Group polarization",
+            d: "Group shift"
+
+        },
+        correct: "c"
+      },
+{
+        question: "The five stages of group development include the forming and norming stages. All of the following are also stages except:",
+        answers: {
+            a: "Performing",
+            b: "Storming",
+            c: "Conforming",
+            d: "Adjourning"
+
+        },
+        correct: "c"
+      },
+{
+        question: "All of the following are commonly-used team training strategies discussed in the text except:",
+        answers: {
+            a: "Team leader training",
+            b: "Cross-training",
+            c: "Team coordination training",
+            d: "Team process training"
+
+        },
+        correct: "d"
+      },
+{
+        question: "Quality circles are:",
+        answers: {
+            a: "work groups who collaborate to learn new skills",
+            b: "group of workers with equal production-and performance levels",
+            c: "work groups who meet to identify work-related problems",
+            d: "work groups who operate under the direction of quality standards"
+
+        },
+        correct: "c"
+      },
+{
+        question: "Max Weber, in his development of early organizational theory, described an organization according to all of the following dimensions except:",
+        answers: {
+            a: "Span of control",
+            b: "Satisfaction of workers",
+            c: "Delegation of authority",
+            d: "Division of labor"
+
+        },
+        correct: "b"
+      },
+{
+        question: "According to Argyris, the natural experience for individuals is growth. He suggested that individuals develop in all of the following ways except:",
+        answers: {
+            a: "From dependent to independent organisms.",
+            b: "From unawareness to awareness of surroundings.",
+            c: "From passive to active organisms.",
+            d: "From organisms with few abilities to organisms with many abilities."
+
+        },
+        correct: "b"
+      },
+{
+        question: "Compared to mechanistic organizations, organic organizations tend to have:",
+        answers: {
+            a: "larger spans of control.",
+            b: "smaller spans of control.",
+            c: "about the same span of control.",
+            d: "negligible spans of control."
+
+        },
+        correct: "a"
+      },
+{
+        question: "Which of the following statements is correct?",
+        answers: {
+            a: "A high span of control is associated with less hierarchical levels.",
+            b: "Managers become redundant when decreasing the span of control.",
+            c: "Self-management leads to a decrease in span of control.",
+            d: "A high span of control implies a low level of autonomy of employees."
+
+        },
+        correct: "a"
+      },
+{
+        question: "Which stage is not part of the episodic-change cycle?",
+        answers: {
+            a: "Unfreezing",
+            b: "Changing",
+            c: "Freezing",
+            d: "Refreezing"
+
+        },
+        correct: "c"
+      },
+{
+        question: "According to the textbook, the appropriate model for continuous change is:",
+        answers: {
+            a: "Unfreeze-Change-Refreeze",
+            b: "Freeze-Rebalance-Unfreeze",
+            c: "Freeze-Change-Refreeze",
+            d: "Unfreeze-Rebalance-Refreeze"
+
+        },
+        correct: "b"
+      },
+{
+        question: "Socialization refers to:",
+        answers: {
+            a: "The creation of more opportunities by the organization for its employees to socialize with each other.",
+            b: "The process by which new employees become aware of the values and procedures of an organization.",
+            c: "The atmosphere of the organization in terms of the cohesiveness and camaraderie of its employees.",
+            d: "The organization's social consciousness and its relationship with the community and environment."
+
+        },
+        correct: "b"
+      },
+{
+        question: "One of the three suggested stages of socialization is:",
+        answers: {
+            a: "Individual stage",
+            b: "Agreement stage",
+            c: "Metamorphosis stage",
+            d: "Formal stage"
+
+        },
+        correct: "c"
+      }
+];
+
+/* ---------------- SHUFFLE FUNCTION ---------------- */
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+/* ---------------- QUIZ LOGIC ---------------- */
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+const resultEl = document.getElementById("result");
+const restartBtn = document.getElementById("restartBtn");
+
+function loadQuestion() {
+    const q = questions[currentQuestion];
+
+    // Update progress text
+    document.getElementById("progress").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    questionEl.textContent = q.question;
+
+     const imgEl = document.getElementById("questionImage");
+
+     if (q.image) {
+          imgEl.src = q.image;
+          imgEl.style.display = "block";
+      } else {
+          imgEl.style.display = "none";
+      }
+
+    answersEl.innerHTML = "";
+    nextBtn.style.display = "none";
+    answered = false;
+
+    for (let key in q.answers) {
+        const button = document.createElement("button");
+        button.textContent = q.answers[key];
+        button.onclick = () => selectAnswer(key);
+        answersEl.appendChild(button);
+    }
+}
+
+function selectAnswer(choice) {
+    if (answered) return;
+    answered = true;
+
+    const correctAnswer = questions[currentQuestion].correct;
+    const buttons = answersEl.querySelectorAll("button");
+    const answerKeys = Object.keys(questions[currentQuestion].answers);
+
+    buttons.forEach((button, index) => {
+        const key = answerKeys[index];
+        button.disabled = true;
+
+        if (key === correctAnswer) {
+            button.classList.add("correct");
+        }
+        if (key === choice && key !== correctAnswer) {
+            button.classList.add("incorrect");
+        }
+    });
+
+    if (choice === correctAnswer) {
+        score++;
+    }
+
+    nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+};
+
+function showResult() {
+    document.getElementById("quiz").style.display = "none";
+    resultEl.style.display = "block";
+    restartBtn.style.display = "block";
+
+    const percentage = Math.round((score / questions.length) * 100);
+    resultEl.textContent = `Your score: ${percentage}% (${score} out of ${questions.length})`;
+}
+
+restartBtn.onclick = () => {
+    currentQuestion = 0;
+    score = 0;
+
+    shuffleArray(questions);   // 🔀 Randomize again on restart
+
+    document.getElementById("quiz").style.display = "block";
+    resultEl.style.display = "none";
+    restartBtn.style.display = "none";
+    loadQuestion();
+};
+
+/* ---------------- START QUIZ ---------------- */
+
+shuffleArray(questions);  // 🔀 Randomize questions on first load
+loadQuestion();
+</script>
+
+</body>
+</html>
