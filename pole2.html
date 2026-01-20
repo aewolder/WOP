@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Potluck Sign-Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px;
+    }
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    iframe {
+      width: 100%;
+      border: none;
+    }
+    .results iframe {
+      height: 350px;
+    }
+    .form iframe {
+      height: 800px;
+      margin-top: 30px;
+    }
+    .note {
+      text-align: center;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🥗 Potluck Sign-Up</h1>
+
+    <p class="note">
+      Names and dishes are visible so we can coordinate.  
+      Please avoid duplicate dishes if possible.
+    </p>
+
+    <!-- LIVE RESPONSES TABLE -->
+    <div class="results">
+      <h2>🍽️ Who’s Bringing What</h2>
+      <iframe src="https://docs.google.com/spreadsheets/d/1-kYFmVYdfSa35LWCvsqsJgKyvtNIHzPtGZGuXYBl6KQ/edit?usp=sharing"></iframe>
+    </div>
+
+    <!-- FORM -->
+    <div class="form">
+      <h2>📝 Add Your Entry</h2>
+      <iframe 
+        src="https://docs.google.com/forms/d/e/1K7VhSMfXP4ZSqcMjscwE3s7jI3vnpSKlipsxxJuCXhc/viewform">
+      </iframe>
+    </div>
+  </div>
+
+</body>
+</html>
