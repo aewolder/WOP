@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Potluck Date Poll</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      padding: 40px;
+    }
+    .container {
+      max-width: 500px;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+    }
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Potluck Date Poll 🥗</h2>
+    <p>Please select all dates that work for you:</p>
+
+    <form action="https://formsubmit.co/allisonwolder@gmail.com" method="POST">
+
+      <!-- Prevent spam -->
+      <input type="hidden" name="_captcha" value="false">
+
+      <!-- Custom subject line -->
+      <input type="hidden" name="_subject" value="Potluck Date Poll Response">
+
+      <!-- Name -->
+      <label>
+        Your Name:
+        <input type="text" name="Name" required>
+      </label>
+
+      <!-- Date options -->
+      <label>
+        <input type="checkbox" name="Dates[]" value="February 23">
+        February 23
+      </label>
+
+      <label>
+        <input type="checkbox" name="Dates[]" value="February 24">
+        February 24
+      </label>
+
+      
+
+      <button type="submit">Submit Availability</button>
+    </form>
+  </div>
+
+</body>
+</html>
