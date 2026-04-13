@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>1BV00 Fundamentals of Business Information Systems (TUe)</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .answers button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .answers button:disabled {
+            cursor: not-allowed;
+            opacity: 0.9;
+        }
+
+        .correct {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .incorrect {
+            background-color: #f44336;
+            color: white;
+        }
+
+        #nextBtn {
+            display: none;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+
+        #result {
+            font-size: 1.3em;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #restartBtn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+        }
+    
+/* Mobile enhancements */
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: system-ui, Arial, sans-serif;
+}
+
+.container, .quiz-container {
+    max-width: 480px;
+    width: 100%;
+    margin: auto;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    font-size: 1em;
+    margin-top: 12px;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+}
+
+.question {
+    font-size: 1.1em;
+    line-height: 1.4;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Fundamentals of Business Information Systems Quiz </h1>
+<div id="progress" style="text-align:center; font-weight:bold; margin-bottom:15px;"></div>
+
+<div id="quiz">
+    <div id="question" class="question"></div>
+    <div id="answers" class="answers"></div>
+    <button id="nextBtn">Next Question</button>
+</div>
+
+<div id="result" style="display:none;"></div>
+<button id="restartBtn" style="display:none;">Restart Quiz</button>
+
+<script>
+alert("JS is running");
+
+/* ---------------- QUESTIONS ---------------- */
+
+const questions = [
+    {
+        question: "Which of the following would not be considered part of the implementation phase of problem solving?",
+        answers: {
+            a: "Change management ",
+            b: "Purchasing hardware for an information systems solution ",
+            c: "Training an employee on new systems software",
+            d: "Evaluating a selection of software packages for implementing a new business process "
+        },
+        correct: "d"
+    },
+    
+ {
+        question: "Consider an information system in a moving company that analyzes travel patterns and decides which routes are the most efficient for every van. The need for employees to follow procedures to update this system with arrival and departure times would be considered a(n) ________ element of the system. ",
+        answers: {
+            a: "organizational",
+            b: "managerial",
+            c: "people",
+            d: "technology"
+        },
+        correct: "a"
+      },
+{
+        question: "These systems are especially suited to situations in which the procedure for arriving at a solutionmay not be fully predefined in advance. ",
+        answers: {
+            a: "Management information systems ",
+            b: "Transaction processing systems ",
+            c: "Decision support systems ",
+            d: "Knowledge management systems"
+        },
+        correct: "c"
+    },
+    {
+        question: "Each of the following is a quality of business organization and structure that serves to enable productive collaboration, except: ",
+        answers: {
+            a: "open culture ",
+            b: "strong hierarchy ",
+            c: "decentralized structure",
+            d: "breadth of collaboration"
+        },
+        correct: "b"
+    },
+    
+{
+        question: "What analytical framework discussed in the chapter helps understand and evaluate the benefits and uses of collaboration tools? ",
+        answers: {
+            a: "Cost/use matrix ",
+            b: "Task/time matrix ",
+            c: "Space/cost matrix ",
+            d: "Time/space matrix "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Benchmarking: ",
+        answers: {
+            a: "compares the efficiency and effectiveness of your business processes against strict standards. ",
+            b: "allows industry participants to develop industry-wide standards. ",
+            c: "is used to measure the speed and responsiveness of information technology. ",
+            d: "synchronizes the business processes of customers, suppliers, and trading partners. "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Which of the following can force a business and its competitors to compete on price alone? ",
+        answers: {
+            a: "High product differentiation ",
+            b: "Poor process efficiency",
+            c: "Demand control",
+            d: "Transparent marketplace"
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Hilton Hotels' use of customer information software to identify the most pro􀁼table customers to direct services to is an example of using information systems to: ",
+        answers: {
+            a: "strengthen customer intimacy. ",
+            b: "differentiate their service. ",
+            c: "focus on market niche. ",
+            d: "increase efficiency. "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "The logical view of a database: ",
+        answers: {
+            a: "shows how data are organized and structured on the storage media. ",
+            b: "presents an entry screen to the user. ",
+            c: "allows the creation of supplementary reports. ",
+            d: "presents data as they would be perceived by end users. "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Data mining is a tool for allowing users to: ",
+        answers: {
+            a: "quickly compare transaction data gathered over many years. ",
+            b: "find hidden relationships in data. ",
+            c: "obtain online answers to ad hoc questions in a rapid amount of time. ",
+            d: "summarize massive amounts of data into much smaller, traditional reports. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Capabilities of supply chain execution systems would not include: ",
+        answers: {
+            a: "identifying the optimal transportation mode. ",
+            b: "tracking the flow of finished goods.",
+            c: "managing materials.",
+            d: "managing warehouse operations."
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Analyzing customer buying patterns is an example of:",
+        answers: {
+            a: "CLTV. ",
+            b: "analytical CRM. ",
+            c: "operational CRM. ",
+            d: "demand planning. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Which of the following Internet business models does Amazon.com use? ",
+        answers: {
+            a: "Content provider ",
+            b: "Portal ",
+            c: "Market creator ",
+            d: "E-tailer "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Digital goods are goods that are: ",
+        answers: {
+            a: "produced digitally. ",
+            b: "sold over digital networks. ",
+            c: "delivered digitally. ",
+            d: "used with digital equipment. "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "Net marketplaces: ",
+        answers: {
+            a: "focus on continuous business process coordination between companies for supply chain management.",
+            b: "are industry owned or operate as independent intermediaries between buyers and sellers. ",
+            c: "are geared towards short-term spot purchasing. ",
+            d: "are more relationship oriented than private industrial networks. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Virtually all successful expert systems deal with problems of: ",
+        answers: {
+            a: "associative data.",
+            b: "classification.",
+            c: "logic and control. ",
+            d: "unstructured decision-making. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Which dimension of quality means that a decision faithfully reflects the concerns and interests ofaffected parties? ",
+        answers: {
+            a: "Due process ",
+            b: "Justice ",
+            c: "Fairness ",
+            d: "Coherence "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "Where there is no well-understood or agreed-on procedure for making a decision, it is said to be: ",
+        answers: {
+            a: "undocumented. ",
+            b: "unstructured. ",
+            c: "documented. ",
+            d: "semistructured. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "________ are intangible benefits of information systems. ",
+        answers: {
+            a: "Improved asset utilization, increased organizational learning, and improved operations ",
+            b: "Reduced workforce, lower outside vendor costs, and increased productivity ",
+            c: "Increased productivity, reduced workforce, and increased job satisfaction ",
+            d: "Lower operational costs, improved resource control, and more information "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "The entire system-building effort is driven by: ",
+        answers: {
+            a: "organizational change. ",
+            b: "feasibility studies. ",
+            c: "data. ",
+            d: "user information requirements. "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "The type of model of the system that is derived from the domain model to specify the implementation-independent viewpoint is called: ",
+        answers: {
+            a: "design model ",
+            b: "implementation model ",
+            c: "platform model",
+            d: "special domain model "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "A recursive association that has multiplicity constraints 1 and 1 at both ends of the association models: ",
+        answers: {
+            a: "graphs ",
+            b: "networks ",
+            c: "acyclic sequences ",
+            d: "cyclic sequences "
+        },
+        correct: "d"
+    },
+{
+        question: "Which SQL statement is used to change a row in a table? ",
+        answers: {
+            a: "ALTER ",
+            b: "DELETE ",
+            c: "MODIFY ",
+            d: "UPDATE "
+        },
+        correct: "d"
+    },
+    {
+        question: "Which domain model constraint cannot be expressed with a constraint in SQL? ",
+        answers: {
+            a: "mandatory attribute constraint ",
+            b: "one-to-many multiplicity constraint ",
+            c: "{unique} ",
+            d: "{xor}"
+        },
+        correct: "d"
+    },
+    
+{
+        question: "In BPMN, if a task has two input arcs (also called flows), it is the same as if the task was preceded by a gateway of which type? ",
+        answers: {
+            a: "AND-join ",
+            b: "AND-split ",
+            c: "XOR-join ",
+            d: "XOR-split "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "How is a Data Object connected with another element in a BPMN model? ",
+        answers: {
+            a: "Association ",
+            b: "Object flow ",
+            c: "Message flow ",
+            d: "Sequence flow "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Consider the order-to-cash process of a company called X that sells MRI scanners. Which of the following is likely to be modeled as a lane in BPMN? ",
+        answers: {
+            a: "Clerk ",
+            b: "Company X ",
+            c: "Customer ",
+            d: "MRI scanner "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Converting raw data into a more meaningful form is called: ",
+        answers: {
+            a: "processing. ",
+            b: "feedback.",
+            c: "capturing. ",
+            d: "organizing. "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Legal and regulatory compliance is an example of the ________ dimension of business problems. ",
+        answers: {
+            a: "management ",
+            b: "organizational ",
+            c: "people ",
+            d: "technology "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "A computerized system that performs and records the daily dealings necessary to conduct business is classified as a(n): ",
+        answers: {
+            a: "executive support system ",
+            b: "transaction-processing system. ",
+            c: "decision support system. ",
+            d: "management-level system. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Which type of system would you use to determine the five suppliers with the worst record in delivering goods on time? ",
+        answers: {
+            a: "ESS ",
+            b: "TPS ",
+            c: "MIS ",
+            d: "DSS "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "Which of the following collaboration tools would be appropriate for participants in separate locations who need to collaborate synchronously? ",
+        answers: {
+            a: "Blog ",
+            b: "Team room ",
+            c: "Electronic meeting software ",
+            d: "Group calendar "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "A firm's value chain is linked to the: ",
+        answers: {
+            a: "value webs of its industry. ",
+            b: "value chains of its suppliers, distributors, and customers. ",
+            c: "value webs of its suppliers and distributors. ",
+            d: "value chains of its suppliers and customers. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "How are information systems used at the industry level to achieve strategic advantage? ",
+        answers: {
+            a: "By building industry-wide, IT-supported consortia and symposia ",
+            b: "By raising the bargaining power of suppliers ",
+            c: "By encouraging the entry of new competitors ",
+            d: "By enforcing standards that reduce the differences between competitors "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "The emergence of the World Wide Web acted as a disruptive technology for: ",
+        answers: {
+            a: "PC manufacturers. ",
+            b: "print publishing. ",
+            c: "the typewriter industry.",
+            d: "microprocessor firms. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "In a table for customers, the information about a single customer would reside in a single: ",
+        answers: {
+            a: "field. ",
+            b: "row. ",
+            c: "column. ",
+            d: "table. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "In terms of the data relationships found by data mining, sequences refers to: ",
+        answers: {
+            a: "events linked over time. ",
+            b: "patterns that describe a group to which an item belongs. ",
+            c: "occurrences linked to a single event. ",
+            d: "undiscovered groupings. "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Supply chain planning systems: ",
+        answers: {
+            a: "track the physical status of goods. ",
+            b: "identify the transportation mode to use for product delivery. ",
+            c: "track the financial information involving all parties.",
+            d: "track the status of orders. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "________ CRM includes customer-facing applications such as tools for sales force automation, callcenter and customer service support, and marketing automation. ",
+        answers: {
+            a: "Operational ",
+            b: "Social ",
+            c: "Web-based ",
+            d: "Sales force "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Varying a product's price according to the supply situation of the seller is called ________ pricing. ",
+        answers: {
+            a: "menu ",
+            b: "flexible ",
+            c: "dynamic ",
+            d: "asymmetric "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "Consumers selling goods and services electronically to other consumers best describes: ",
+        answers: {
+            a: "disintermediation. ",
+            b: "C2C e-commerce. ",
+            c: "M-commerce. ",
+            d: "B2C e-commerce. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "You are planning the requirements for a site tracking and reporting system for your company Website. Which of the following information requirements would not be essential for this function? ",
+        answers: {
+            a: "Number of unique visitors ",
+            b: "Pages visited",
+            c: "Products purchased ",
+            d: "Secure credit card clearing "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Neural network applications in medicine, science, and business address problems in all of the following except: ",
+        answers: {
+            a: "control and optimization. ",
+            b: "pattern classification. ",
+            c: "generalization. ",
+            d: "prediction. "
+        },
+        correct: "c"
+    },
+    {
+        question: "Simon's four different stages in decision making are, in order from first to last: ",
+        answers: {
+            a: "identification, choice, design, and implementation. ",
+            b: "identification, design, choice, and finalization. ",
+            c: "intelligence, choice, design, and implementation. ",
+            d: "intelligence, design, choice, and implementation. "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Which of the following would not be classified as a type of intelligent technique? ",
+        answers: {
+            a: "Genetic algorithms",
+            b: "Case-based reasoning ",
+            c: "Neural networks ",
+            d: "Virtual reality "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "Which process develops a detailed description of the functions that a new information system must perform? ",
+        answers: {
+            a: "Feasibility study ",
+            b: "Requirements analysis ",
+            c: "Systems design ",
+            d: "Test plan development "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Hidden costs, such as ________ costs, can easily undercut anticipated benefits from outsourcing. ",
+        answers: {
+            a: "vendor selection ",
+            b: "hardware ",
+            c: "software ",
+            d: "employee salary "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Given a domain model with an association operator from Machine to Person, and a multiplicity constraint 0..1 at the end of Person. Which statement below cannot be valid in the „Universe of Discourse“ described by the domain model (Alan, Adam, Amy, Angela are instances of Person, the other nouns refer to instances of Machine): ",
+        answers: {
+            a: "Adam operates machine 1 and machine 2. ",
+            b: "Alan and Angela operate machine 1. ",
+            c: "Amy operates no machine. ",
+            d: "Machine 5 has no operator. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Which of the following sentences describes a ternary association? ",
+        answers: {
+            a: "A flight lands in the airport of a city. ",
+            b: "A supplier provides a product for a project. ",
+            c: "A student reads an article. ",
+            d: "A model is the winner of a beauty contest. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "A recursive association that has at both ends multiplicity constraint * models a ",
+        answers: {
+            a: "composition. ",
+            b: "graph. ",
+            c: "sequence. ",
+            d: "tree. "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Which SQL statement is used to give users access rights to tables? ",
+        answers: {
+            a: "ALLOW ",
+            b: "ENABLE ",
+            c: "GRANT ",
+            d: "REVOKE "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "Given a table Person with columns name and age. Which of the following SQL statements is correct? ",
+        answers: {
+            a: "SELECT name FROM Person WHERE age>50 and <80 ",
+            b: "SELECT name FROM Person WHERE age>50 and age <80 ",
+            c: "SELECT name FROM Person WHERE age>50 and WHERE age<80 ",
+            d: "None of the above "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "Which gateways are best used to model cyclic behaviour in BPMN? ",
+        answers: {
+            a: "Exclusive ",
+            b: "Event-based ",
+            c: "Parallel ",
+            d: "Inclusive "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Which of the following sentences on BPMN is correct? ",
+        answers: {
+            a: "Each BPMN model has pool(s). ",
+            b: "Each BPMN model has task(s). ",
+            c: "Each BPMN model has event(s). ",
+            d: "Each BPMN model has data object(s). "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "In a classical Petri net, the number of tokens produced by the string of a transition is ",
+        answers: {
+            a: "equal to the number of output places. ",
+            b: "equal to the number of tokens that are consumed. ",
+            c: "equal to the number of output arcs. ",
+            d: "equal to the number of tokens in the initial marking (state) of the net. "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "A hierarchy: ",
+        answers: {
+            a: "results in a clear-cut division of labor. ",
+            b: "is composed primarily of experts trained for different functions. ",
+            c: "is a pyramid structure of rising authority and responsibility. ",
+            d: "is used primarily in large organizations to define job roles. "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "________ systems provide information to coordinate all of the business processes that deal with customers in sales, marketing, and service to optimize revenue, customer satisfaction, and customer retention. ",
+        answers: {
+            a: "CRM ",
+            b: "MIS ",
+            c: "ESS ",
+            d: "CPS "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "Instant messaging, videoconferencing, and shared screens are all examples of ________ collaboration tools. ",
+        answers: {
+            a: "bimodal ",
+            b: "colocated ",
+            c: "synchronous ",
+            d: "spontaneous "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "The ________ strategy is characterized by heavy centralization of corporate activities in the home country of origin. ",
+        answers: {
+            a: "domestic exporter ",
+            b: "multinational ",
+            c: "franchise ",
+            d: "transnational "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "In a relational database, a record is also called a(n): ",
+        answers: {
+            a: "tuple ",
+            b: "row ",
+            c: "entity ",
+            d: "field "
+        },
+        correct: "b"
+    },
+    
+{
+        question: "A data ________ stores current and historical data of potential interest to decision makers throughout the company. ",
+        answers: {
+            a: "warehouse ",
+            b: "mart ",
+            c: "archive ",
+            d: "mine "
+        },
+        correct: "a"
+    },
+    
+{
+        question: "In a relational database, the three basic operations used to develop useful sets of data are: ",
+        answers: {
+            a: "select, project, and where ",
+            b: "select, join, and where. ",
+            c: "select, project, and join. ",
+            d: "select, from, and join. "
+        },
+        correct: "c"
+    },
+    
+    
+
+{
+        question: "Systems that enable a firm to generate demand forecasts for a product, and to develop sourcing and manufacturing plans for that product, best describes supply chain ________ systems. ",
+        answers: {
+            a: "demand ",
+            b: "delivery ",
+            c: "planning ",
+            d: "execution "
+        },
+        correct: "c"
+    },
+    
+{
+        question: "Marketing modules in CRM systems would provide tools for: ",
+        answers: {
+            a: "assigning and managing customer service requests. ",
+            b: "capturing prospect and customer data. ",
+            c: "identifying profitable and unprofitable customers. ",
+            d: "managing sales prospect and contact information. "
+        },
+        correct: "b"
+    },
+{
+        question: "Information ________ exists when one party in a transaction has more information that is important for the transaction than the other party. ",
+        answers: {
+            a: "transparency ",
+            b: "asymmetry ",
+            c: "complexity ",
+            d: "discrimination"
+        },
+        correct: "b"
+    },
+{
+        question: "In which of the following Internet business models does a merchant create an online digital environment that enables people with like interests to share information or buy and sell goods? ",
+        answers: {
+            a: "Community provider ",
+            b: "Service provider ",
+            c: "Market creator ",
+            d: "Transaction broker "
+        },
+        correct: "a"
+    },
+{
+        question: "The Internet enables ________ marketing, by leveraging the fact that there is always some demand, however small, for a product. ",
+        answers: {
+            a: "long-tail ",
+            b: "behavioral ",
+            c: "crowdsource ",
+            d: "prediction "
+        },
+        correct: "a"
+    },
+{
+        question: "The type of decision that can be made by following a definite procedure is called a(n) ________ decision. ",
+        answers: {
+            a: "structured ",
+            b: "unstructured ",
+            c: "semistructured ",
+            d: "procedural "
+        },
+        correct: "a"
+    },
+{
+        question: "Which of the following is not an element of the business intelligence environment? ",
+        answers: {
+            a: "User interface ",
+            b: "Executive users ",
+            c: "Platform ",
+            d: "Business analytics toolset "
+        },
+        correct: "b"
+    },
+{
+        question: "________ help media firms store and manage unstructured digital data such as photographs, images, videos, and audio files. ",
+        answers: {
+            a: "Digital asset management systems ",
+            b: "Knowledge networks ",
+            c: "LMS ",
+            d: "CAD "
+        },
+        correct: "a"
+    },
+{
+        question: "Acceptance testing: ",
+        answers: {
+            a: "includes all the preparations for the trials. ",
+            b: "tests the functioning of the system as a whole. ",
+            c: "tests each program separately. ",
+            d: "provides the final certification that the system is ready to be used in a production setting. "
+        },
+        correct: "d"
+    },
+{
+        question: "For which type of software development is the following statement true: Groups of objects are assembled into software components for common functions, which can be combined into large-scale business applications? ",
+        answers: {
+            a: "Object-oriented development ",
+            b: "Component-based development ",
+            c: "Structured methodologies ",
+            d: "RAD "
+        },
+        correct: "b"
+    },
+{
+        question: "All of the following describe the effects of globalization, except: ",
+        answers: {
+            a: "significant increases in operating costs.",
+            b: "reduction of labor costs through outsourcing. ",
+            c: "ability to find low-cost suppliers. ",
+            d: "increases in transaction costs. "
+        },
+        correct: "a"
+    },
+{
+        question: "Intranets: ",
+        answers: {
+            a: "are based on mainframe technology. ",
+            b: "are multiple networks joined together. ",
+            c: "are typically used to communicate with the business's trusted vendors. ",
+            d: "use Internet technology for a private company network."
+        },
+        correct: "d"
+    },
+{
+        question: "Which type of system would you use to forecast the return on investment if you used new suppliers with better delivery track records? ",
+        answers: {
+            a: "ESS ",
+            b: "TPS ",
+            c: "MIS ",
+            d: "DSS "
+        },
+        correct: "d"
+    },
+{
+        question: "Which of the following statements is not true about collaboration in a business setting? ",
+        answers: {
+            a: "Collaboration may be a short-lived activity, lasting just a few minutes. ",
+            b: "Collaboration is a many-to-many activity as opposed to a one-to-one or one-to-many activity. ",
+            c: "Meaningful collaboration requires a supportive business firm culture and the right, decentralized structure. ",
+            d: "The evidence of the business benefits of collaboration are largely anecdotal. "
+        },
+        correct: "d"
+    },
+{
+        question: "A ________ is a senior manager who oversees the use of IT in the firm. ",
+        answers: {
+            a: "CEO ",
+            b: "CFO ",
+            c: "CIO ",
+            d: "CIT "
+        },
+        correct: "c"
+    },
+    {
+        question: "The Internet raises the bargaining power of customers by: ",
+        answers: {
+            a: "creating new opportunities for building loyal customer bases. ",
+            b: "making more products available. ",
+            c: "making information available to everyone. ",
+            d: "lowering transaction costs. "
+        },
+        correct: "c"
+    },
+{
+        question: "________ typically develop a single information system, usually at the home base, and then replicate it around the world. ",
+        answers: {
+            a: "Domestic exporters ",
+            b: "Multinational firms ",
+            c: "Franchisers ",
+            d: "Transnational firms "
+        },
+        correct: "a"
+    },
+{
+        question: "The ________ model highlights the primary or support activities that add a margin of value to a firm's products or services where information systems can best be applied to achieve a competitive advantage. ",
+        answers: {
+            a: "value chain ",
+            b: "core competency ",
+            c: "network economy ",
+            d: "Porter"
+        },
+        correct: "a"
+    },
+{
+        question: "The process of streamlining data to minimize redundancy and awkward many-to-many relationships is called: ",
+        answers: {
+            a: "normalization ",
+            b: "data scrubbing. ",
+            c: "data cleansing. ",
+            d: "data administration. "
+        },
+        correct: "a"
+    },
+{
+        question: "OLAP is a tool for enabling: ",
+        answers: {
+            a: "users to obtain online answers to ad hoc questions in a rapid amount of time. ",
+            b: "users to view both logical and physical views of data. ",
+            c: "programmers to quickly diagram data relationships. ",
+            d: "programmers to normalize data. "
+        },
+        correct: "a"
+    },
+{
+        question: "Which of the following traditional solutions enables manufacturers to deal with uncertainties in the supply chain? ",
+        answers: {
+            a: "Safety stock ",
+            b: "Continuous replenishment ",
+            c: "Just-in-time strategies ",
+            d: "Demand planning "
+        },
+        correct: "a"
+    },
+{
+        question: "Customer relationship management systems typically provide software and online tools for sales, customer service, and: ",
+        answers: {
+            a: "account management. ",
+            b: "marketing. ",
+            c: "advertising. ",
+            d: "public relations. "
+        },
+        correct: "b"
+    },
+{
+        question: "Transaction brokers: ",
+        answers: {
+            a: "generate revenue from advertising or from directing buyers to sellers. ",
+            b: "save users money and time by processing online sales transactions. ",
+            c: "provide a digital environment where buyers and sellers can establish prices for products. ",
+            d: "sell physical products directly to consumers or individual businesses. "
+        },
+        correct: "b"
+    },
+{
+        question: "A third-party Net marketplace that connects many buyers and suppliers for spot purchasing is called a(n): ",
+        answers: {
+            a: "exchange. ",
+            b: "vertical market. ",
+            c: "private exchange. ",
+            d: "e-hub. "
+        },
+        correct: "a"
+    },
+{
+        question: "Which of the following best illustrates the affiliate revenue model? ",
+        answers: {
+            a: "eBay receives a small fee from a seller if a seller is successful in selling an item. ",
+            b: "Epinions receives a fee after steering a customer to a participating Web site where he or she makes a purchase. ",
+            c: "Flickr provides basic services for free, but charges a premium for advanced services. ",
+            d: " Apple accepts micropayments for single music track downloads."
+        },
+        correct: "b"
+    },
+{
+        question: "Which of the following is a key problem in managing knowledge? ",
+        answers: {
+            a: "Classifying knowledge ",
+            b: "Storing knowledge ",
+            c: "Distributing knowledge ",
+            d: "Locating knowledge "
+        },
+        correct: "d"
+    },
+{
+        question: "Which dimension of quality means that a decision is the result of a known process and can be appealed to a higher authority? ",
+        answers: {
+            a: "Due process ",
+            b: "Justice ",
+            c: "Fairness ",
+            d: "Accuracy "
+        },
+        correct: "a"
+    },
+{
+        question: "Which of the following is not part of the implementation process? ",
+        answers: {
+            a: "Evaluating the system ",
+            b: "Testing ",
+            c: "Systems analysis ",
+            d: "Creating detailed design specifications "
+        },
+        correct: "c"
+    },
+{
+        question: "In the traditional systems development lifecycle, end users: ",
+        answers: {
+            a: "are important and ongoing members of the team from the original analysis phase through maintenance. ",
+            b: "are important only in the testing phases. ",
+            c: "have no input. ",
+            d: "are limited to providing information requirements and reviewing the technical staff's work. "
+        },
+        correct: "d"
+    },
+    
+{
+        question: "________ is a method for deciding among alternative systems based on a system of ratings for selected objectives. ",
+        answers: {
+            a: "A scoring model ",
+            b: "A scorecard ",
+            c: "Portfolio analysis ",
+            d: "Risk analysis "
+        },
+        correct: "a"
+    },
+{
+        question: "If you were collecting and storing information about your music collection, an album in general is best modeled in UML as a(n) _____ ",
+        answers: {
+            a: "Association ",
+            b: "Class ",
+            c: "Object ",
+            d: "Attribute "
+        },
+        correct: "b"
+    }
+      
+
+];
+
+/* ---------------- SHUFFLE FUNCTION ---------------- */
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+/* ---------------- QUIZ LOGIC ---------------- */
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("question");
+const answersEl = document.getElementById("answers");
+const nextBtn = document.getElementById("nextBtn");
+const resultEl = document.getElementById("result");
+const restartBtn = document.getElementById("restartBtn");
+
+function loadQuestion() {
+    const q = questions[currentQuestion];
+
+    // Update progress text
+    document.getElementById("progress").textContent =
+        `Question ${currentQuestion + 1} of ${questions.length}`;
+
+    questionEl.textContent = q.question;
+    answersEl.innerHTML = "";
+    nextBtn.style.display = "none";
+    answered = false;
+
+    for (let key in q.answers) {
+        const button = document.createElement("button");
+        button.textContent = q.answers[key];
+        button.onclick = () => selectAnswer(key);
+        answersEl.appendChild(button);
+    }
+}
+
+function selectAnswer(choice) {
+    if (answered) return;
+    answered = true;
+
+    const correctAnswer = questions[currentQuestion].correct;
+    const buttons = answersEl.querySelectorAll("button");
+    const answerKeys = Object.keys(questions[currentQuestion].answers);
+
+    buttons.forEach((button, index) => {
+        const key = answerKeys[index];
+        button.disabled = true;
+
+        if (key === correctAnswer) {
+            button.classList.add("correct");
+        }
+        if (key === choice && key !== correctAnswer) {
+            button.classList.add("incorrect");
+        }
+    });
+
+    if (choice === correctAnswer) {
+        score++;
+    }
+
+    nextBtn.style.display = "block";
+}
+
+nextBtn.onclick = () => {
+    currentQuestion++;
+    if (currentQuestion < questions.length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+};
+
+function showResult() {
+    document.getElementById("quiz").style.display = "none";
+    resultEl.style.display = "block";
+    restartBtn.style.display = "block";
+
+    const percentage = Math.round((score / questions.length) * 100);
+    resultEl.textContent = `Your score: ${percentage}% (${score} out of ${questions.length})`;
+}
+
+restartBtn.onclick = () => {
+    currentQuestion = 0;
+    score = 0;
+
+    shuffleArray(questions);   // 🔀 Randomize again on restart
+
+    document.getElementById("quiz").style.display = "block";
+    resultEl.style.display = "none";
+    restartBtn.style.display = "none";
+    loadQuestion();
+};
+
+/* ---------------- START QUIZ ---------------- */
+
+shuffleArray(questions);  // 🔀 Randomize questions on first load
+loadQuestion();
+</script>
+
+</body>
+</html>
