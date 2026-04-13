@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Accounting & Finance Formulas Flashcards</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body {
+    font-family: system-ui, Arial, sans-serif;
+    background: #f2f4f8;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.container {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+}
+.card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 30px 20px;
+    font-size: 1.15em;
+    cursor: pointer;
+    user-select: none;
+    min-height: 320px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.45;
+    overflow: hidden;
+}
+.card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.hint {
+    font-size: 0.82em;
+    color: #666;
+    margin-top: 14px;
+}
+button {
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 1em;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+button:hover { background: #0056b3; }
+.counter {
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: #555;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card" onclick="flipCard()">
+        <div id="card-content"></div>
+    </div>
+
+    <button onclick="nextCard()">Next Card</button>
+    <div class="counter" id="counter"></div>
+</div>
+
+<script>
+const cards = [
+    {'term': 'Declining Balance Depreciation Rate', 'definition': `<img src="depreciation.png" alt="Declining Balance">`},
+    {'term': 'Cost of Goods Sold (COGS)', 'definition': `<img src="COGS.png" alt="COGS">`},
+    {'term': 'Multi-Step Income Statement Formulas', 'definition': `<img src="income statement formulas.png" alt="Income Statement">`},
+    {'term': 'Manufacturing Overhead Components', 'definition': `<img src="manufacturing overhad.png" alt="Manufacturing Overhead">`},
+    {'term': 'Cost of Goods Sold – Detailed Manufacturing Breakdown', 'definition': `<img src="costs of goods sold.png" alt="COGS Breakdown">`},
+    {'term': 'Net Realizable Value (NRV)', 'definition': `<img src="NRV.png" alt="NRV">`},
+    {'term': 'Present Value of Annuity (PV Annuity)', 'definition': `<img src="annuity.png" alt="PV Annuity">`},
+    {'term': 'Residual Income (RI)', 'definition': `<img src="RI.png" alt="Residual Income">`},
+    {'term': 'Break-even Point & Target Sales Volume Formulas', 'definition': `<img src="Break even.png" alt="Break-even">`},
+    {'term': 'Material Price Variance & Material Quantity Variance', 'definition': `<img src="MPV.png" alt="Material Variances">`},
+    {'term': 'Weighted Average Cost of Capital (WACC)', 'definition': `<img src="WACC.png" alt="WACC">`},
+    {'term': 'Return on Investment (ROI)', 'definition': `<img src="ROI.png" alt="ROI">`},
+    {'term': 'Net Present Value (NPV)', 'definition': `<img src="NPV.png" alt="NPV">`}
+];
+
+// Shuffle cards
+for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+}
+
+let currentIndex = 0;
+let showingDefinition = false;
+
+const content = document.getElementById("card-content");
+const counter = document.getElementById("counter");
+
+function showTerm() {
+    content.innerHTML = `<strong>${cards[currentIndex].term}</strong>
+        <div class="hint">(Tap card to see formula image)</div>`;
+    showingDefinition = false;
+    counter.textContent = `Card ${currentIndex + 1} of ${cards.length}`;
+}
+
+function flipCard() {
+    if (!showingDefinition) {
+        content.innerHTML = `${cards[currentIndex].definition}
+            <div class="hint">(Tap card to see name)</div>`;
+        showingDefinition = true;
+    } else {
+        showTerm();
+    }
+}
+
+function nextCard() {
+    currentIndex = (currentIndex + 1) % cards.length;
+    showTerm();
+}
+
+showTerm();
+</script>
+
+</body>
+</html>
