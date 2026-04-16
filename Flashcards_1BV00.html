@@ -34,11 +34,10 @@ body {
     line-height: 1.45;
 }
 
-/* NEW: front vs back colors */
+/* Front vs Back colors */
 .card.front {
     background: #dbeeff;
 }
-
 .card.back {
     background: white;
 }
@@ -75,14 +74,14 @@ button:hover {
         <div id="card-content"></div>
     </div>
 
-    <!-- NEW: Back button -->
     <button id="backBtn" onclick="prevCard()" style="display:none;">Back</button>
-    <button onclick="nextCard()">Next Card</button>
+    <button onclick="nextCard()">Next</button>
 
     <div class="counter" id="counter"></div>
 </div>
 
 <script>
+// ✅ YOUR FULL ORIGINAL CARD LIST 
 const cards = [
     {'term': 'What is social business?', 'definition': 'Use of social networking platforms to engage employees, customers, and suppliers'},
     {'term': 'Name two benefits of social business', 'definition': 'Increased productivity and innovation'},
@@ -131,8 +130,7 @@ const cards = [
     {'term': 'What is an expert system?', 'definition': 'System that mimics human expertise using rules'},
     {'term': 'What is a genetic algorithm?', 'definition': 'Method for finding optimal solutions by testing many options'},
     {'term': 'What is an intelligent agent?', 'definition': 'Software that performs tasks automatically'},
-    {'term': 'What is a learning management system (LMS)?', 'definition': 'System for training and education'},
-    
+    {'term': 'What is a learning management system (LMS)?', 'definition': 'System for training and education'},    
     {'term': 'Name the five primary activities in the value chain', 'definition': 'Inbound logistics (receiving/storing materials), Operations (transforms inputs), Outbound logistics (storing/distributing), Sales and marketing, Service (maintenance/repair)'},
     {'term': 'Name the four support activities in the value chain', 'definition': 'Administration and management, Human resources, Technology (e.g., CAD), Procurement (purchasing systems)'},
     {'term': 'What does quality mean from the producer’s perspective?', 'definition': 'Conformance to specifications or absence of variation from those specifications'},
@@ -160,7 +158,7 @@ const cards = [
     {'term': 'Give examples of structured decisions', 'definition': 'Determine overtime eligibility, restock inventory, offer credit to customers'},
     {'term': 'Give examples of semi-structured decisions', 'definition': 'Design marketing plan, develop departmental budget, design new corporate website'},
     {'term': 'What are the six components of the business intelligence environment?', 'definition': 'Data from business environment, BI infrastructure, analytics toolset, managerial users, delivery platform, user interface'},
-    {'term': 'Name key BI and analytics capabilities', 'definition': 'Production reports, parameterized reports, dashboards/scorecards, ad hoc queries, drill down, forecasts/scenarios/models'},
+    {'term': 'Name key BI and analytics capabilities', 'definition': 'Production reports, parameterized reports, dashboards/scorecards, ad hoc queries, drill down, orecasts/scenarios/models'},
     {'term': 'What is operational intelligence?', 'definition': 'Business activity monitoring for day-to-day operations'},
     {'term': 'What is location analytics?', 'definition': 'Uses geographic data and GIS to visualize problems and gain business insight'},
     {'term': 'What benefits do expert systems provide?', 'definition': 'Improved decisions, reduced errors/costs/training time, improved quality and service'},
@@ -168,12 +166,9 @@ const cards = [
     {'term': 'What are fuzzy logic systems?', 'definition': 'Rule-based systems that handle approximate or subjective values'},
     {'term': 'What do neural networks do (and their limitation)?', 'definition': 'Find hidden patterns in massive data; cannot always explain their solutions'},
     {'term': 'What are enterprise-wide knowledge management systems?', 'definition': 'Enterprise content management, expert directories, learning management systems (LMS)'},
-    {'term': 'What are examples of knowledge work systems?', 'definition': 'CAD, virtual reality, augmented reality'}
+    {'term': 'What are examples of knowledge work systems?', 'definition': 'CAD, virtual reality, augmented reality'} 
 ];
 
-];
-
-// Shuffle cards
 for (let i = cards.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [cards[i], cards[j]] = [cards[j], cards[i]];
@@ -192,12 +187,11 @@ function showTerm() {
     cardElement.classList.add("front");
 
     content.innerHTML = `<strong>${cards[currentIndex].term}</strong>
-        <div class="hint">(Front)</div>`;
+        <div class="hint">(Tap)</div>`;
 
     showingDefinition = false;
     counter.textContent = `Card ${currentIndex + 1} of ${cards.length}`;
 
-    // Show/hide back button
     backBtn.style.display = currentIndex === 0 ? "none" : "inline-block";
 }
 
@@ -207,7 +201,7 @@ function flipCard() {
         cardElement.classList.add("back");
 
         content.innerHTML = `${cards[currentIndex].definition}
-            <div class="hint">(Back)</div>`;
+            <div class="hint">(Tap)</div>`;
 
         showingDefinition = true;
     } else {
